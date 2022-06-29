@@ -111,7 +111,7 @@ author:
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-       url: mailto:sdmas5730@gmail.com
+      url: mailto:sdmas5730@gmail.com
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
@@ -123,7 +123,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-       url: "https://github.com/jsdmas"
+      url: "https://github.com/jsdmas"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -142,7 +142,7 @@ footer:
       # url:
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
-       url: "https://github.com/jsdmas"
+      url: "https://github.com/jsdmas"
     - label: "Bitbucket"
       icon: "fab fa-fw fa-bitbucket"
       # url:
