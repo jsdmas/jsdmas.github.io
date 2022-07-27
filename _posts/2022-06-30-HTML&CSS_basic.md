@@ -1,14 +1,27 @@
 ---
-title:  "HTML&CSS basic"
-excerpt: "HTML,CSS 기본정보"
-
+title:  "웹 Introduction"
+excerpt: "기본적인 웹구조 설명"
+toc : true
+toc_sticky: true
 categories:
   - HTML&CSS
 tags:
   - HTML
   - CSS
-last_modified_at: 2022-06-30
+last_modified_at: 2022-07-27
 ---
+## HTML
+HyperText Markup Language
+
+- 웹을 이루는 가장 기본적 구성요소로, 웹 콘텐츠의 의미와 구조를 정의할떄 사용.
+- HyperText  
+웹 페이지를 다른 페이지로 연결하는 링크를 뜻한다.
+- HTML은 웹 브라우저에 표시되는 글과 이미지 등의 다양한 콘텐츠를 표시하기위해 '마크업'을 사용한다.  
+HTML은 다양한 '요소' 를 사용하는데 종류로는 <head>, <title>, <body>, <footer>, <p>, <span> ... 등이 있다.  
+더 다양하고 자세한 설명은 아래 링크로 확인.  
+[link](https://developer.mozilla.org/ko/docs/Web/HTML/Element)
+
+### HTML 예시
 
 ```html
 <!DOCTYPE html>
@@ -16,26 +29,35 @@ last_modified_at: 2022-06-30
 
 <html lang="kr">
 구글,네이버,bing 같은 검색엔진들에 도움을 주기 위해 쓴다
-우리 사이트에서 사용되는 언어가 무엇인지 말해준다
 주된 언어가 한국어인지 영어인지 검색엔진에게 알려준다
 <head>
-    <meta charset="UTF-8">
-    브라우저에게 text를 어떻게 그려달라는지 말해준다  
-    한글이나 다른 특수문자가 있는 언어를 압력 할 떄 브라우저가 이해 못할떄가 있는데 이 태그가 없으면 글자가 꺠져보인다.
 
-    <title>Home</title>
-    홈페이지 이름 
-    <meta name="description" content="This is my website." />
-    description[설명]태그는 구글이검색할떄 찾는 태그이다.
-    [title도 구글이 검색에 중요한 비중을 가지고 있다.]
-    meta : 부가적인 정보를 뜻하고 2가지 attribute(속성)을 갖고있다. 
-    -[content, name]
-    meta tag들은 self-closig tag이다.
-    <meta property="og:title" content="Nomad Coders">
-    og코드는 카카오톡 대화방에 링크를보내면 웹사이트 정보가 보여지게되도록 만든다
-    불러올떄 순서는 og:title -> description -> og:image
-    사이트의 부가적인 정보들은 head 태그에 작성해준다
+<meta charset="UTF-8">
+브라우저에게 text를 어떻게 그려달라는지 말해준다.
+한글이나 다른 특수문자가 있는 언어를 입력시 브라우저가 이해 못할떄가 
+있는데 이 태그가 없으면 글자가 꺠져보인다.
+
+<title>Home</title>
+
+<meta name="description" content="This is my website." />
+description[설명]태그는 구글이검색할떄 찾는 태그이다.
+meta : 부가적인 정보를 뜻하고 2가지 attribute(속성)을 갖고있다. 
+-[content, name]
+meta tag들은 self-closig tag이다.
+<meta property="og:title" content="Nomad Coders">
+og코드는 카카오톡 대화방에 링크를보내면 웹사이트 정보가 보여지게되도록 만든다
+불러올떄 순서는 og:title -> description -> og:image
 </head>
+사이트의 부가적인 정보들은 head 태그에 작성해준다
 ```
-더많은 html 사용법들은
-<https://developer.mozilla.org/ko/docs/Web/HTML/Element>
+## CSS
+Cascading style sheet  
+browser 에게 웹 사이트가 어떻게 보여야 하는지 알려준다(색상,크기 등)
+
+## JavaScript
+웹 사이트를 동적으로 만들어주는 프로그래밍 언어이다.
+
+## Semantic HTML
+시맨틱은 코드 조각의 의미를 나타낸다. — 예를 들어 ("이게 어떻게 시각적으로 보여질까?" 보다)"이 Javascript 라인을 실행하는 것은 어떤 효과가 있는가?", 혹은 "이 HTML 엘리먼트가 가진 목적이나 역할은 무엇인가?"  
+자세한 설명은 아래 링크 참조.  
+[link](https://developer.mozilla.org/ko/docs/Glossary/Semantics)
