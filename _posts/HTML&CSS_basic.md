@@ -9,28 +9,6 @@ tags:
   - CSS
 last_modified_at: 2022-06-30
 ---
-##기본 정보
-
-웹사이트를 만드는 데 사용할 수 있는 언어는 HTML, CSS, JS 로 구성된다.
-
-HTML을 사용하는 이유
-↳ To describe the content of our website to the browser
-
-CSS을 쓰는 이유
-↳ To tell the browser how the content of our website looks like
-
-JS를 쓰는 이유
-↳ To make our website interactive
-
-브라우저는 CSS를 위에서 아래로 읽기 때문에 입력순서가 중요하다.
-
-HTML은  Markup Language
-
-CSS는 Design languages
-
-JS는 Programming language 
-
-##html 기본 골격
 
 ```html
 <!DOCTYPE html>
@@ -58,11 +36,6 @@ JS는 Programming language
     불러올떄 순서는 og:title -> description -> og:image
     사이트의 부가적인 정보들은 head 태그에 작성해준다
 </head>
-
-ex) h1 { color:blue } 에서
-  selector(선택자): h1
-  property(속성): color
-  value(값): blue
 ```
 더많은 html 사용법들은
 <https://developer.mozilla.org/ko/docs/Web/HTML/Element>
