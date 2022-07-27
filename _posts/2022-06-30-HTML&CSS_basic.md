@@ -19,7 +19,7 @@ HyperText Markup Language
 - HTML은 웹 브라우저에 표시되는 글과 이미지 등의 다양한 콘텐츠를 표시하기위해 '마크업'을 사용한다.  
 HTML은 다양한 '요소' 를 사용하는데 종류로는 head,title,body,footer,p,span ... 등이 있다.  
 더 다양하고 자세한 설명은 아래 링크로 확인.  
-[link](https://developer.mozilla.org/ko/docs/Web/HTML/Element)
+[HTML 요소 참고서](https://developer.mozilla.org/ko/docs/Web/HTML/Element)
 
 ### HTML 예시
 
@@ -58,6 +58,8 @@ browser 에게 웹 사이트가 어떻게 보여야 하는지 알려준다(색�
 웹 사이트를 동적으로 만들어주는 프로그래밍 언어이다.
 
 ## Semantic HTML
-시맨틱은 코드 조각의 의미를 나타낸다. — 예를 들어 ("이게 어떻게 시각적으로 보여질까?" 보다)"이 Javascript 라인을 실행하는 것은 어떤 효과가 있는가?", 혹은 "이 HTML 엘리먼트가 가진 목적이나 역할은 무엇인가?"  
-보다 자세한 설명은 아래 링크 참조.  
-[link](https://developer.mozilla.org/ko/docs/Glossary/Semantics)
+시맨틱은 코드 조각의 의미를 나타낸다.  
+예를 들어 "이게 어떻게 시각적으로 보여질까?" 보다 "이 Javascript 라인을 실행하는 것은 어떤 효과가 있는가?", 혹은 "이 HTML 엘리먼트가 가진 목적이나 역할은 무엇인가?"  
+
+자세한 설명은 아래 링크 참조.  
+[Semantic 용어 사전](https://developer.mozilla.org/ko/docs/Glossary/Semantics)
