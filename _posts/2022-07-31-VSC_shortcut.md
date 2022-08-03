@@ -54,7 +54,8 @@ nav>ul>li*4
 |↑ + command + .|숨김파일 노출유무 토글|
 |↑ + command + G|폴더 이동|
 
-- 화면 캡처
+- 화면 캡처  
+  
 |단축키|설명|
 |shift + command + 3|전체화면 캡처|
 |shift + command + 4|영역 캡처|
