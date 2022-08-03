@@ -58,5 +58,5 @@ nav>ul>li*4
 |단축키|설명|
 |shift + command + 3|전체화면 캡처|
 |shift + command + 4|영역 캡처|
-|↑ + command + 4|창 캡처|
-|↑ + command + 5|화면 캡처 프로그램 실행|
+|shift + command + 4|창 캡처|
+|shift + command + 5|화면 캡처 프로그램 실행|
