@@ -65,7 +65,7 @@ nav>ul>li*4
 - 터미널 단축키  
 
 |기능|MAC명령어|옵션|
-|현재 위치에서 폴더창 열기|open|open . , open ~ , open /users/사용자계정멸/desktop|
+|현재 위치에서 폴더창 열기|open|open . , open ~ , open /users/사용자계정명/desktop|
 |현재 위치 표시하기|pwd||
 |작업 디렉토리 이동(Change Directory)|cd||
 |화면 지우기(Clear Screen)|clear||
