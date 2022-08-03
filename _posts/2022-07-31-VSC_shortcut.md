@@ -39,4 +39,24 @@ nav>ul>li*4
 |command + ←|문단 맨 앞으로|
 |command + →|문단 맨 뒤로|
 
+- Finder 기본 단축키
 
+|단축키|설명|
+|Enter|파일 또는 폴더명 변경|
+|Space|미리보기(Preview)팝업으로 열기|
+|↑ + Command + N|새폴더|
+|Command + Delete|파일삭제|
+|Command + T|탭 열기|
+|Command + '[ 'or ']'|이전, 다음 폴더로 이동|
+|Command + ↑|상위 폴더로 이동|
+|^ + command + ↑|상위 폴더로 이동하며 새창 열기|
+|Command + ↓|선택한 폴더로 이동 또는 선택한 파일 실행|
+|↑ + command + .|숨김파일 노출유무 토글|
+|↑ + command + G|폴더 이동|
+
+- 화면 캡처
+|단축키|설명|
+|shift + command + 3|전체화면 캡처|
+|shift + command + 4|영역 캡처|
+|↑ + command + 4|창 캡처|
+|↑ + command + 5|화면 캡처 프로그램 실행|
