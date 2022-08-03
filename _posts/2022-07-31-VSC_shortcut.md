@@ -61,3 +61,17 @@ nav>ul>li*4
 |shift + command + 4|영역 캡처|
 |shift + command + 4|창 캡처|
 |shift + command + 5|화면 캡처 프로그램 실행|
+
+- 터미널 단축키  
+
+|기능|MAC명령어|옵션|
+|현재 위치에서 폴더창 열기|open|open . , open ~ , open /users/사용자계정멸/desktop|
+|현재 위치 표시하기|pwd||
+|작업 디렉토리 이동(Change Directory)|cd||
+|화면 지우기(Clear Screen)|clear||
+|파일 복사|cp|cp a.txt, 폴더 복사시 cp -R hello|
+|파일 삭제|rm|del옵션 -f 강제로 삭제,-r 디렉토리 내부 삭제,-d 비어있는 디렉토리 제거,-i 삭제할것인지 되묻는다,-v 삭제되는 대상의 정보를 출력|
+|현재 디렉토리 파일의 정보 출력|ls|-l, -a, -al|
+|디렉토리 생성|mkdir||
+|디렉토리 삭제|rmdir|비어있지 않은 폴더는 삭제할 수 없다.|
+|파일 및 폴더 이름 변경|mv|mv 원본경로 대상경로|
