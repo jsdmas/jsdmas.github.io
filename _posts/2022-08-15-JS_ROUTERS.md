@@ -9,6 +9,7 @@ tags:
   - JS
   - routers
   - express
+  - nodejs
 last_modified_at: 2022-08-15
 ---
 
@@ -60,7 +61,9 @@ export const join = (req, res) => res.send("Join");
 export const login = (req, res) => res.send("Login");
 ```
 </div>
- 
+
+
+
  ## parameter
 
  - 파라미터는( : ) url안에 변수를 넣는걸 허용해준다.
