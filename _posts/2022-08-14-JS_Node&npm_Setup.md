@@ -1,6 +1,6 @@
 ---
 title: "NodeJS, NPM 간단설명"
-execrpt: "nodeJS, npm, express를 통해 간단히 설명"
+execrpt: "nodeJS & npm & express 설명"
 toc: true
 toc_sticky: true
 categories:
@@ -27,8 +27,7 @@ last_modified_at: 2022-08-14
 - Npm init : 새로운 프로젝트나 패키지를 만들때 사용.
 - npm은 자바스크립트 언어를 위한 패키지 매니저이다.
 - npm은 nodeJS와 상호작용을 할 수 있게 해준다.
-
-[npm_공식홈페이지](https://www.npmjs.com/)
+- [npm_공식홈페이지](https://www.npmjs.com/)
 
 ## setup
 
@@ -182,7 +181,7 @@ res.send() -> 뭔가를 보낼떄 사용
 
 ### middlware
 
-- middlware는 중간(middle)에 있는 sortware이다.
+- middlware는 중간(middle)에 있는 software이다.
 - 여기서 중간은 request와 response가 움직이는 활동의 중간을 말한다.
 - middlewares는 controller와 비슷하다. 실질적으로 controller가 middleware 그 자체이다. 모든 게 middleware이다.
 - middleware도 request와 response, 추가로 next도 있다. (home에도 next가 있다.)
