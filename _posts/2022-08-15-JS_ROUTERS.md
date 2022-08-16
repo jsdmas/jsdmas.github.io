@@ -14,7 +14,7 @@ last_modified_at: 2022-08-15
 
 ## Router
 
-- [라우팅_express](https://expressjs.com/ko/starter/basic-routing.html)
+- [라우터_express](https://expressjs.com/ko/starter/basic-routing.html)
 - 라우터는 컨트롤러와 URL의 관리를 쉽게 해준다.
 - 쉽게 말해, 미니 어플리케이션을 만들게 해준다.
 - 작업중인 주제를 기반으로 URL을 그룹화해준다.
