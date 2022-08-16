@@ -29,11 +29,10 @@ import express from "express";
 // express를 express라는 이름으로 import
 import globalRouter from "./routers/globalrouter";
 // routers폴더의 globalrouter를 globalRouter라는 이름으로 import
-
-
+app.use("/", globalRouter);
 ```
 
-`globalRouter`
+`globalRouter.js`
 
 ```js
 import express from "express";
@@ -54,12 +53,11 @@ export default globalRouter;
 // default로 내보내면 globalRouter의 변수명을 다르게 지정할 수 있다.
 ```
 
-`userController`
+`userController.js`
 
 ```js
 export const join = (req, res) => res.send("Join");
 export const login = (req, res) => res.send("Login");
-
 ```
 </div>
  
