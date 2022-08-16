@@ -62,9 +62,7 @@ export const login = (req, res) => res.send("Login");
 ```
 </div>
 
-
-
- ## parameter
+## parameter
 
  - 파라미터는( : ) url안에 변수를 넣는걸 허용해준다.
  - expresss는 우리가 고른 이름과 함께 값을 제공해준다.
