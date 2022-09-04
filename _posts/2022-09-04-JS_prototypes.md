@@ -15,6 +15,7 @@ last_modified_at: 2022-09-04
 <div class="notice--primary" makrdown="1">
 
 `맴버 변수를 갖는 생성자를 통해서 객체 만들기`
+
 ```js
 function User(){
     //맴버변수 정의 (일반적으로 맴버변수는 일반 변수와 구분하기위해 (_)로 시작하는 이름을 갖는다.)
@@ -44,6 +45,7 @@ console.log(foo); // User2 { _id: 'hello', _email: 'hi@naver.com' }
 <div class="notice--primary" makrdown="1">
 
 `prototype을 활용한 매서드 정의`
+
 ```js
 const User3 = function(id, email){
     this._id = id;
@@ -70,6 +72,7 @@ student.logout();
 <div class="notice--primary" makrdown="1">
 
 `get, set활용`
+
 ```js
 function User4(){
     this._id = null;
@@ -117,6 +120,7 @@ console.log(friend.email);
 <div class="notice--primary" makrdown="1">
 
 `prototype을 활용한 매서드 정의`
+
 ```js
 function Member(username, password){
     this._username = username;
