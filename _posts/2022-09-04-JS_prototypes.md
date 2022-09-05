@@ -29,6 +29,7 @@ foo._email = "hi@naver.com";    //위와동일
 ```
 
 `파라미터를 맴버변수에 복사하는 생성자`
+
 ```js
 const User2 = function(id, email){
     this._id = id;
@@ -38,6 +39,7 @@ const User2 = function(id, email){
 const foo = new User2("hello", "hi@naver.com");
 console.log(foo); // User2 { _id: 'hello', _email: 'hi@naver.com' }
 ```
+
 </div>
 
 ## 매서드
@@ -65,13 +67,14 @@ const student = new User3(`학생`, `hi@naver.com`);
 student.login();    //객체 안에 내장된 메서드 호출
 student.logout();
 ```
-
 </div>
 
 ## getter, setter
 <div class="notice--primary" makrdown="1">
 
+
 `get, set활용`
+
 
 ```js
 function User4(){
@@ -112,10 +115,10 @@ console.log(friend.email);
 // email에 대한 getter 호출됨
 // hi@naver.com
 ```
+
 </div>
 
 ## json 활용
-
 
 <div class="notice--primary" makrdown="1">
 
@@ -167,6 +170,7 @@ member1.login();// 로그인! username=hihi, password=1234
 member1.logout();// 로그아웃! username=, password=
 member1.username = `world`; //setter를 통한 맴버변수 변경
 ```
+
 </div>
 
 ## Class
