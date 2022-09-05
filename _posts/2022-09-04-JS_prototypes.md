@@ -11,9 +11,7 @@ last_modified_at: 2022-09-04
 ---
 
 ## 생성자
-
-<div class="notice--primary" makrdown="1">
-  
+<div class="primary--notice">
 
 `맴버 변수를 갖는 생성자를 통해서 객체 만들기`
 
@@ -44,9 +42,7 @@ console.log(foo); // User2 { _id: 'hello', _email: 'hi@naver.com' }
 </div>
 
 ## 매서드
-
-<div class="notice--primary" makrdown="1">
-  
+<div class="primary--notice">  
 
 `prototype을 활용한 매서드 정의`
 
@@ -72,9 +68,8 @@ student.logout();
 </div>
 
 ## getter, setter
-<div class="notice--primary" makrdown="1">
-  
-  
+<div class="primary--notice">
+
 `get, set활용`
 
 
@@ -121,9 +116,7 @@ console.log(friend.email);
 </div>
 
 ## json 활용
-
-<div class="notice--primary" makrdown="1">
-  
+<div class="primary--notice">
 
 `prototype을 활용한 매서드 정의`
 
