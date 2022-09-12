@@ -48,7 +48,7 @@ const h = new helloworld();
 
 ## 생성자
 
-<div class="primary--notice" markdown="1">
+<div class="notice--primary" markdown="1">
 
 `맴버 변수를 갖는 생성자를 통해서 객체 만들기`
 
@@ -80,7 +80,7 @@ console.log(foo); // User2 { _id: 'hello', _email: 'hi@naver.com' }
 </div>
 
 ## 매서드
-<div class="primary--notice" markdown="1">  
+<div class="notice--primary" markdown="1">  
 
 `prototype을 활용한 매서드 정의`
 
@@ -106,7 +106,7 @@ student.logout();
 </div>
 
 ## getter, setter
-<div class="primary--notice" markdown="1">
+<div class="notice--primary" markdown="1">
 
 `get, set활용`
 - Object.defineProperty(생성자이름.prototype, 함수이름, {getter,setter 정의}) 형식으로 특정 맴버변수에 대한 getter,setter를 정의할 수 있다. getter,setter는 같은 함수이름을 공유한다.  
@@ -163,7 +163,7 @@ console.log(friend.email);
 이러한 형식으로 생성자, 맴버변수, getter, setter, 메서드 등이 묶여 있는 단위를 `클래스`라 한다.  
 클래스에 정의된 기능을 하나의 변수에 모두 부여한 형태가 `객체`이다.  
 
-<div class="primary--notice" markdown="1">
+<div class="notice--primary" markdown="1">
 
 `prototype을 활용한 매서드 정의`
 
@@ -324,7 +324,7 @@ class 클래스이름{
     }
 }
 ```
-<div markdown="1" class="primary--notice">
+<div markdown1" class="--notice--primary">
 
 `생성자예시`
 
@@ -554,7 +554,7 @@ class Foo {
  f3 = Foo.getInstance();
 ```
 
-<div markdown="1" class="primary--notice">
+<div markdown1" class="--notice--primary">
 
 `싱글톤패턴 예시`
 ```js
