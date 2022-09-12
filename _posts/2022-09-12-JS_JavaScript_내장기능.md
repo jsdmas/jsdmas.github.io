@@ -546,6 +546,262 @@ console.log(data); // (7) [10, 20, 30, 40, 50, 60, 70]
 const k = data.pop(); // 마지막 요소를 리턴하고 제거
 console.log(k);  // 70
 console.log(data);  // (6) [10, 20, 30, 40, 50, 60]
+
+const x = data.shift(); // 맨 앞 요소를 리턴하고 제거
+console.log(x);     // 10
+console.log(data);  // (5) [20, 30, 40, 50, 60]
+
+data.unshift(0,10); // 맨 앞에 요소 추가 (파라미터 수 제한 없음)
+console.log(data);  // (7) [0, 10, 20, 30, 40, 50, 60]
+
+const z = data.splice(2,3); // 2번째 위치부터 3개를 잘라서 반환하고 원본에서는 제거
+console.log(z); // (3) [20, 30, 40]
+console.log(data); // (4) [0, 10, 50, 60]
+
+// 0번째 위치부터 2개를 제거하고 그 위치에 다른 요소들을 배치함
+// 제거한 수보다 추가되는 원소수가 많을 경우 배열이 확장됨. 기존의 원소들은 뒤로 밀림.
+// 제어한 수보다 추가되는 원소수가 적을 경우 배열이 축소됨.
+data.splice(0,2, `a`, `b`, `c`);
+console.log(data);  // (5) ['a', 'b', 'c', 50, 60]
+```
+`배열 결합`
+```js
+const a = [1,2];
+const b = [3,4,5];
+const c = [6,7,8,9];
+// a에 b와 c를 결합한 새로운 배열을 반환.
+const d = a.concat(b,c);
+console.log(d); // (9) [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+`배열 원소 확인`
+```js
+// 배열에서 원하는 원소가 있는지 여부 확인하기
+let arr = [1, 0, false];
+
+// arr.indexOf(item, from)는 인덱스 from부터 시작해 item(요소)을 찾는다.
+// 요소를 발견하면 해당 요소의 인덱스를 반환한다.
+// arr.lastIndexOf(item, from)는 위 메서드와 동일한 기능을 하는데, 검색을 끝에서부터 시작한다.
+// 두 번째 파라미터 (from)이 없으면 처음부터 탐색한다.
+console.log(arr.indexOf(0)); // 1
+console.log(arr.indexOf(false)); // 2
+//발견하지 못하면 -1 반환
+console.log(arr.indexOf(null)); // -1
+
+// arr.includes(item, from)는 인덱스 from부터 시작해 item이 있는지를 검색하는데, 
+// 해당하는 요소를 발견하면 true를 반환한다.
+console.log(arr.includes(1)); // true
+console.log(arr.includes(100)); // false
+
+/**
+ * indexOf 메서드는 요소를 찾을 때 완전 항등 연산자 === 을 사용한다는 점에 유의해야 한다.
+ * false를 검색하면 정확히 false만을 검색하지, 0을 검색하진 않는다.
+ * 요소의 위치를 정확히 알고 싶은게 아니고 요소가 
+ * 배열 내 존재하는지 여부만 확인하고 싶다면 arr.includes를 사용하는 게 좋다.
+ * includes는 NaN도 제대로 처리한다는 점에서 indexOf/lastIndexOf와 약간의 차이가 있다.
+ */
+const arr2 = [NaN];
+console.log(arr2.indexOf(NaN)); // -1 (완전 항등 비교 === 는 NaN엔 동작하지 않으므로 0이 출력되지 않는다.)
+console.log(arr2.includes(NaN)); // true (NaN의 여부를 확인한다.)
+```
+`forEach`
+- forEach 메서드를 활용하여 배열의 모든 원소 탐색.
+- 콜백함수에게 배열의 값과 인덱스를 전달한다.
+- 콜백함수는 원소의 수 만큼 순차적으로 실행된다.
+
+```js
+const arr = [10, 20, 30 ,40 ,50];
+arr.forEach((v,i)=>{
+    if (i == 3){
+        console.log(`---반복중단`);
+        // break는 for,while 문에서만 사용 가능하기 때문에 함수 안에서는 사용할 수 없다.
+        // forEach의 콜백함수에서 반복을 중단하고자 return을 사용할 경우 현재 동작중인
+        // 콜백만 종료될 뿐 전체 반복에는 영향이 없다.
+        return;
+    }
+    console.log(`${i}번째 원소 => ${v}`);
+});
+/**
+ 0번째 원소 => 10
+ 1번째 원소 => 20
+ 2번째 원소 => 30
+ ---반복중단
+ 4번째 원소 => 50
+ */
 ```
 
+`some`
+- 탐색을 중단하는 기능을 제공하는 some함수
+- some 함수는 콜백함수가 true를 리턴하는 순간 순환을 중단한다.
+```js
+const arr = [10,20,30,40,50];
+arr.some((v,i)=>{
+    if(i == 3){
+        console.log(`---반복중단`);
+        return true;
+    }
+    console.log(`${i}번째 원소 => ${v}`);
+});
+/**
+ 0번째 원소 => 10
+ 1번째 원소 => 20
+ 2번째 원소 => 30
+ ---반복중단
+ true
+*/
+```
+`map`
+- 배열의 원소를 가공하여 새로운 배열 만들기
+- map함수에 전달된 콜백이 리턴하는 값들을 하나의 배열로 묶어서 hello에 저장
+- hello는 반드시 원본 배열과 같은 길이를 갖는 배열이다.
+- 리턴하지 않은 index에 대한 원소는 undefined가 된다.
+```js
+const arr = [10,20,30,40,50];
+const hello = arr.map((v,i)=> v * 10 );
+console.log(hello); // (5) [100, 200, 300, 400, 500]
+```
+`find (배열 검색)`
+- 주어진 판별함수를 만족하는 첫번째 값을 반환한다. 못찾으면 undefined를 반환한다.
+- 찾고자 하는 항목이 아닌 검색 규칙을 구현한 콜백함수를 전달해야 한다. 
+```js
+const arr = [5,12,8,131,44];
+const found = arr.find((v)=>{
+    //파라미터로 전달되는 v는 배열의 모든 원소가 순차적으로 전달된다.
+    console.log(v);
+
+    // v를 우리가 원하는 조건에 충족하는지 검사하여 true/false를 리턴
+    // true를 리턴하는 순간 배열의 탐색을 중단한다. (break와 동일한 기능)
+    if( v%2 == 0){
+        // true가 리턴되는 경우 v는 found에 저장된다.
+        return true;
+    }else{
+        // false가 리턴되는 경우 v는 버려진다.
+        return false;
+    }
+});
+console.log(found);
+```
+순서 : 5 대입 -> 12 대입 (return true) -> found값 : 12 -> 종료  
+`응용`
+```js
+// forEach를 사용해 배열에서 특정 조건을 충족하는 원소 추출.
+const arr = [5,12,8,131,44];
+const d = new Array();
+arr.forEach((v,i)=>{
+    if(v%2 == 0){
+        d.push(v);
+    }
+});
+console.log(d); // (3) [12, 8, 44]
+
+// filter 이용
+const arr2 = [5,12,8,131,44];
+const d2 = arr2.filter(function(v,i,arr) {
+    console.log(`v=${v}, i=${i}, arr=${arr}`);
+    if(v%2==0){
+        //true가 리턴되는 경우 v는 results 배열의 원소로 저장된다.
+        //true를 리턴하더라도 배열의 모든 원소를 탐색하기 전까지는 종료되지 않는다.
+        return true;
+    } else{
+        //false가 리턴되는 경우 v는 버려진다.
+        return false;
+    }
+});
+console.log(d2); // (3) [12, 8, 44]
+```
+`배열 정렬`
+- 퀵정렬 알고리즘을 사용하여 배열 자체를 정렬한다.
+- 배열의 모든 원소를 문자열로 취급하기 때문에 글자 정렬기준이 적용된다.
+```js
+const arr = [2,1,15];
+// sort 함수도 정렬 조건을 콜백함수로 처리한다.
+arr.sort((a,b)=>{
+    // 정렬을 위해 비교되는 원소값들이 파라미터로 전달된다.
+    console.log(`a=${a}, b=${b}`);
+
+    //리턴값이 양수인 경우: a가 b보다 크다.
+    //리턴값이 음수인 경우: b가 a보다 크다.
+    if(a>b){
+        return 1;
+    }else{
+        return -1;
+    }
+});
+console.log(arr);
+/**
+ a=1, b=2
+ a=15, b=1
+ a=15, b=2
+ (3) [1, 2, 15]
+ */
+```
+`역순배치`
+```js
+let arr = [1,2,3,4,5];
+arr.reverse();
+console.log(arr); // (5) [5, 4, 3, 2, 1]
+```
+`reduce`
+- 배열의 각 요소를 순회하며 callback함수의 실행 값을 누적하여 하나의 결과값을 반환
+- accumulator(누산기) : 직전 콜백이 리턴한 값
+- index : 이번 회차에 탐색되는 배열 원소의 인덱스 (생략가능)
+- array : 배열 원본 (여기서는 arr자체, 생략가능)
+- 최초 실행시 accumulator에는 0 번째 원소인 1이 전달되고 currentValue(현재 값)에는 1번째 원소인 2가 전달되며, index는 currentValue에 대한 1이 전달된다.
+- 두 번째 실행부터 accumulator에는 이전 회차에서 리턴한 값이 되돌아온다. 그리고 currentValue에는 2번째부터 순서대로 매 실행회차마다 다음 원소가 전달된다.
+- 즉, reduce는 배열의 모든 원소를 탐색하면서 누적 결과를 만들고자 할 경우 사용한다.
+```js
+const arr = [1,2,3,4,5];
+const result = arr.reduce((accumulator, currentValue, index, array) =>{
+    console.log(`accumulator=${accumulator}, currentValue=${currentValue}, index=${index}`);
+    return accumulator + currentValue;
+});
+console.log(`result = ${result}`);
+
+//불필요한 파라미터 생략, 코드 간단히 표현
+const result2 = arr.reduce((acc, cur)=> acc + cur);
+console.log(`result2 = ${result2}`);
+/**
+ accumulator=1, currentValue=2, index=1
+ accumulator=3, currentValue=3, index=2
+ accumulator=6, currentValue=4, index=3
+ accumulator=10, currentValue=5, index=4
+ result = 15
+ result2 = 15
+ */
+
+
+// accumlator의 초기값 지정하기
+// reduce의 콜백함수 다음에 두 번째 인자로 accumlator의 초기값을 설정할 수 있다.
+const result3 = arr.reduce((accumulator, currentValue, index, array) =>{
+    console.log(`accumulator=${accumulator}, currentValue=${currentValue}, index=${index}`);
+    return accumulator + currentValue;
+}, 2);
+// 더하는건 같은데 걍 더하는 시작값만 다르게 설정할떄 사용.
+console.log(`result3 = ${result3}`)
+/**
+ accumulator=2, currentValue=1, index=0
+ accumulator=3, currentValue=2, index=1
+ accumulator=5, currentValue=3, index=2
+ accumulator=8, currentValue=4, index=3
+ accumulator=12, currentValue=5, index=4
+ result3 = 17
+*/
+```
+`응용`
+```js
+const covid19 = [
+    {date: `0125`, active: 426},
+    {date: `0126`, active: 324},
+    {date: `0127`, active: 764},
+    {date: `0128`, active: 434},
+    {date: `0129`, active: 432},
+    {date: `0130`, active: 222},
+    {date: `0131`, active: 321},
+    {date: `0132`, active: 980}
+];
+// 전체 확진자 수 구하기
+// 객체를 탐색할 때는 accumulator의 초기값을 설정하고 0번째 원소부터 currentValue로 받아야 한다.
+const total = covid19.reduce((acc, cur)=> acc + cur.active, 0);
+console.log(`전체 확진자 수 : ${total}`); // 전체 확진자 수 : 3903
+console.log(`평균 확진자 수 : ${total/covid19.length}`); // 평균 확진자 수 : 487.875
+```
 </div>
