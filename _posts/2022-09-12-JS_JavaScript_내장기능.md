@@ -125,6 +125,7 @@ console.log(decodeURI(encodeURI(set4)));
 ## encodeURIComponent
 - 알파벳과 숫자및 비예약 표식을 제외한 모든 글자를 URL에 포함시킬 수 있는 문자열로 인코딩한다.
 - URL에 사용해도 문제가 없는 특수문자를 제외하고 모든 글자를 변환  
+
 ```js
 const set1 = `;,/?:@&=+$#`; // 예약 문자
 const set2 = `-_.!~*'()`; // 비예약 문자
@@ -213,7 +214,7 @@ foo.매서드()
 - 문자열 객체에 내장된 메서드들은 변수가 담고 있는 내용을 가공하거나 특정 내용을 추출하는 기능을 갖는다.
 - 이 기능들의 공통점은 `원본 내용은 절대 변하지 않고, 가공 결과를 리턴한다.`
 
-<div markdown="1" class="primary--notice">
+<div markdown="1" class="notice--primary">
 
 `변수 형식으로 문자열 만들기`
 ```js
@@ -301,7 +302,7 @@ console.log(`Hello JS, World JS`.replaceAll("JS","자바스크립트"));
 -  모든 기능이 정적 맴버변수와 정적 매서드 형태로 제공된다.
 -  즉, 객체 생성을 하지 않고 클래스 이름으로 직접 접근한다.
 
-<div markdown="1" class="primary--notice">
+<div markdown="1" class="notice--primary">
 
 `주어진 값 중에서 최대값(파라미터 수 제한 없음)`
 ```js
@@ -339,7 +340,7 @@ function random(n1, n2){
 ## Date
 - 객체를 생성하는 순간의 시스템 시각이나 생성자 파라미터로 전달된 시각을 플랫폼에 종속되지 않는 형태로 나타낸다.
 
-<div markdown="1" class="primary--notice">
+<div markdown="1" class="notice--primary">
 
 `객체 생성`
 ```js
@@ -535,7 +536,7 @@ if(userid.length > 20){
 console.log(`검사완료.`);
 ```
 ## Array
-<div markdown="1" class="primary--notice">
+<div markdown="1" class="notice--primary">
 
 `배열 원소 추가, 삭제, 변경 방법`
 ```js
