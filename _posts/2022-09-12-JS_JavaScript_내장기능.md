@@ -93,10 +93,459 @@ parseInt(`Hello`, 8) // 전부 숫자가 아님.
 - 주어진 문자열을 URL에 포함시키기에 적절한 형태로 변환(인코딩) 하는 처리
 - 인코딩하지 않는 문자 : A-Z a-z 0-9 ; , / ? : @ & = + $ - _ . ! ~ * ' ( ) #
   
-`잘못된 경우`  
-> <a href="자바스크립트.html">clcik</a>
-
+`잘못된 경우`    
+```js
+<a href="자바스크립트.html">clcik</a>
+```
+  
 `올바른 경우`  
-> <a href = "%EC%9E%90%EB%B0%94....%BD&8A%B8.html">click</a>
+```js
+<a href = "%EC%9E%90%EB%B0%94....%BD%8A%B8.html">click</a>
+```
+  
+```js
+const set1 = `;,/?:@&=+$#`; // 예약 문자
+const set2 = `-_.!~*'()`; // 비예약 문자
+const set3 = `ABC abc 123`; // 알파벳 및 숫자, 공백
+const set4 = `자바스크립트`;
 
+// 특수문자(예약문자 및 비예약 문자)를 변환하지 못하기 때문에 UTF-8 환경에서는 사용이 불가.
+console.log(encodeURI(set1)); // ;,/?:@&=+$#
+console.log(encodeURI(set2)); // -_.!~*'()
+console.log(encodeURI(set3)); // ABC%abc%123 (공백은 % 으로 인코딩.)
+console.log(encodeURI(set4)); // %EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8
 
+// 인코딩 된 문자열을 원래의 문자열로 역변환 (디코딩)
+console.log(decodeURI(encodeURI(set1)));
+console.log(decodeURI(encodeURI(set2)));
+console.log(decodeURI(encodeURI(set3)));
+console.log(decodeURI(encodeURI(set4)));
+```
+
+## encodeURIComponent
+- 알파벳과 숫자및 비예약 표식을 제외한 모든 글자를 URL에 포함시킬 수 있는 문자열로 인코딩한다.
+- URL에 사용해도 문제가 없는 특수문자를 제외하고 모든 글자를 변환  
+```js
+const set1 = `;,/?:@&=+$#`; // 예약 문자
+const set2 = `-_.!~*'()`; // 비예약 문자
+const set3 = `ABC abc 123`; // 알파벳 및 숫자, 공백
+const set4 = `자바스크립트`;
+
+console.log(encodeURIComponent(set1)); //%3B%2C%2F%3F%3A%40%26%3D%2B%24%23
+console.log(encodeURIComponent(set2)); // -_.!~*'()
+console.log(encodeURIComponent(set3)); // ABC%20abc%20123
+console.log(encodeURIComponent(set4)); // %EC%9E%90%EB%B0%94%EC%8A%A4%ED%81...
+
+//디코딩 수행
+console.log(decodeURIComponent(encodeURIComponent(set1)));
+console.log(decodeURIComponent(encodeURIComponent(set2)));
+console.log(decodeURIComponent(encodeURIComponent(set3)));
+console.log(decodeURIComponent(encodeURIComponent(set4)));
+```
+
+## setTimeout
+- setTimeout(func, int)
+- func 는 콜백함수, int 는 1/1000초 단위의 시간값.
+- 지정된 함수를 두 번째 인자로 전달된 시간 후에 실행하도록 예약한다. (딜레이 가능)
+- setTimeout() 이후의 처리 로직들은 func의 실행 여부와 상관없이 즉시 실행된다.
+
+```js
+function foo(){
+    for(let i =1; i<10; i++){
+        console.log(`2 X ${i} = ${i*2}`);
+    }
+}
+setTimeout(foo, 3000);
+console.log(`구구단을 외자`);
+
+// 일반적으로 콜백함수를 별도로 정의하지 않고 즉시 전달한다.
+// setTimeout(funtion() {
+setTimeout(()=>{
+    for(let i =1; i<10; i++){
+        console.log(`3 X ${i} = ${i*3}`);
+    }
+}, 1500);
+console.log(`프로그램 종료.`);
+
+```
+실행순서 : 구구단을 외자 -> 프로그램 종료 -> 3단 출력 -> 2단 출력
+
+## setInterval
+- 지정된 함수를 두 번쨰 인자로 전달된 시간마다 한 번씩 호출한다.(타이머기능)
+- setInterval() 이후의 처리 로직들은 func의 실행 여부와 상관없이 즉시 실행된다.
+- 타이머를 종료시킬 수 있는 timerid를 반환한다.
+- 이 값을 clearInterval() 함수에 전달하면 타이머가 종료된다.
+- int는 밀리세컨드(1/1000)초를 의미하는 정수.
+
+```js
+let cnt1 = 0;
+const timerId1 = setInterval(()=>{
+    cnt1++;
+    console.log(`[타이머1] ${cnt1} 번째 자동 실행`);
+    if(cnt1 == 5){
+        console.log(`타이머1 종료`);
+        clearInterval(timerId1);
+    }
+}, 3000);
+console.log(`타이머1 시작`);
+
+let cnt2 = 0;
+const timerId2 = setInterval(()=>{
+    cnt2++;
+    console.log(`[타이머2] ${cnt2} 번째 자동 실행`);
+    if(cnt2 == 10){
+        console.log(`타이머2 종료`);
+        clearInterval(timerId2);
+    }
+}, 1000);
+console.log(`타이머2 시작`);
+```
+실행순서 : 타이머1 시작 출력 -> 타이머2 시작 출력 -> 타이머2 1번쨰 자동실행... -> 타이머1 1 번쨰 자동실행 ... -> 타이머2 종료 -> 타이머1 종료
+
+## String
+- 문자열은 그 자체가 객체이다. 객체라는 것은 그 안에 맴버변수(프로퍼티)와 메서드(함수)가 내장되어 있음을 의미.
+- 그러므로 일반적으로 생성하는 문자열 변수 안에는 메서드와 프로퍼티가 자동으로 내장된다.
+
+```js
+const foo = `Hello world`;
+foo.매서드()
+```
+- 문자열 객체에 내장된 메서드들은 변수가 담고 있는 내용을 가공하거나 특정 내용을 추출하는 기능을 갖는다.
+- 이 기능들의 공통점은 `원본 내용은 절대 변하지 않고, 가공 결과를 리턴한다.`
+
+<div markdown="1" class="primary--notice">
+
+`변수 형식으로 문자열 만들기`
+```js
+const str = `Hello World`;
+```
+`객체 생성 방식으로 문자열 만들기`
+```js
+const str = new String(`Hello JavaScript`);
+```
+`ex`
+```js
+const msg = `Life is too short, You need Javascript.`;
+
+//문자열의 글자 수를 가져온다. -> 공백과 특수문자 포함.
+console.log("문자열 길이 : " + msg.length);
+
+// 파라미터로 설정된 위치의 글자를 리턴한다. --> 위치는 0부터 카운트
+console.log("두 번쨰 글자 : " + chatAt(2));
+
+// 모든 문자열은 그 자체로 배열처럼 취급될 수 있다.
+console.log(`두 번쨰 글자 : ${msg[2]}`);
+
+// 파라미터로 전달된 내용이 처음 나타나는 위치를 리턴한다.
+console.log(`f 가 처음 나타나는 위치 : ${msg.indexOf("f")}`);
+
+// 찾지 못할경우 -1을 반환한다.
+console.log(`z 가 처음 나타나는 위치 : ${msg.indexOf("z")}`);
+
+//단어나 문장으로 검색할 경우 일치하는 내용이 시작되는 첫 글자의 위치를 반환.
+console.log(`short 가 처음 나타나는 위치 : ${msg.indexOf("short")}`);
+
+//indexOf에 파라미터가 두개인 경우,
+// 두 번째 숫자 값은 첫 번째 파라미터의 글자를 찾기 시작하는 위치를 의미한다.
+const p = msg.indexOf("i"); // 첫 번째 위치
+console.log(`i가 두 번째로 나타나는 위치 : ${msg.indexOf("i", p+1)}`);
+
+// 파라미터로 전달된 글자가 마지막으로 나타나는 위치를 리턴한다.
+// 단 이 위치를 문자열의 끝에서 부터 세는 것이 아니라 문자열의 처음부터 센다.
+// 찾지 못할 경우 -1을 반환.
+console.log(`a 의 마지막 위치 : ${msg.lastIndexOf("a")}`);
+
+//응용
+if (msg.indexOf(`Hello`) > -1){
+    console.log(`Hello가 포함됨.`);
+}else{
+    console.log(`Hello가 포함되지 않음.`);
+}
+
+// 잘라내기 위한 시작 위치와 끝 위치를 파라미터로 설정한다.
+// 지정된 끝 위치의 직전 글자까지만 잘라낸다.
+console.log(`문자열 자르기 : ${msg.substring(0, 17)}`);
+
+// 두 번째 파라미터가 없을 경우 지정된 위치부터 끝까지 자른다.
+console.log(`문자열 자르기 : ${msg.substring(19)}`);
+
+//모든 글자를 대문자로 변환한다.
+console.log(msg.toUpperCase());
+//모든 글자를 소문자로 변환한다.
+console.log(msg.toLowerCase());
+
+```
+`문자열의 앞/뒤 공백 지우기`
+```js
+console.log(`   Hello World   `.trim());
+// Hello World
+```
+`문자열에 포함된 구분자를 기준으로 문자열을 잘라 배열로 반환한다.`
+```js
+console.log(`HTML,CSS,JavaScript`.split(","));
+// (3) ['HTML', 'CSS', 'JavaScript']
+```
+`첫 번째 파라미터의 내용을 두 번째 파라미터로 변경한 결과를 반환한다.`
+```js
+// 첫 번째 파라미터와 일치하는 내용이 둘 이상 존재할 경우 첫 번째 항목만 변경한다.
+console.log(`HTML,CSS,JavaScript`.replace(",","$"));
+// HTML$CSS,JavaScript
+
+console.log(`Hello JS, World JS`.replaceAll("JS","자바스크립트"));
+// Hello 자바스크립트, World 자바스크립트
+```
+</div>
+
+## Math
+-  수학적인 속성과 메서드를 가진 내장 객체
+-  모든 기능이 정적 맴버변수와 정적 매서드 형태로 제공된다.
+-  즉, 객체 생성을 하지 않고 클래스 이름으로 직접 접근한다.
+
+<div markdown="1" class="primary--notice">
+
+`주어진 값 중에서 최대값(파라미터 수 제한 없음)`
+```js
+console.log(Math.max(100,123,456,789,1000)); // 1000
+```
+`주어진 값 중 최소값(파라미터 수 제한 없음)`
+```js
+console.log(Math.min(100,123,456,789)); // 100
+```
+`소수점 반올림`
+```js
+console.log(Math.round(3.7146)); // 4
+```
+`소수점 올림과 내림`
+```js
+console.log("올림 : "+ Math.ceil(3.7146));// 4
+console.log("내림 : "+ Math.floor(3.7146));// 3
+```
+`절대값을 반환`
+```js
+console.log(Math.abs(-123));// 123
+```
+`0~1 범위의 난수 발생`
+```js
+console.log(Math.random());// 0.1656573...
+```
+`두 수 사이의 난수를 리턴하는 함수`
+```js
+function random(n1, n2){
+    return parseInt(Math.random() * (n2 - n1 + 1)) + n1;
+}
+```
+</div>
+
+## Date
+- 객체를 생성하는 순간의 시스템 시각이나 생성자 파라미터로 전달된 시각을 플랫폼에 종속되지 않는 형태로 나타낸다.
+
+<div markdown="1" class="primary--notice">
+
+`객체 생성`
+```js
+const date = new Date();
+```
+`년,월,일,시간,분,초 리턴받기`
+```js
+const date = new Date();
+console.log(date.getFullYear());
+// 월은 0이 1월 , 11이 12월을 의미한다.
+console.log(date.getMonth() + 1);
+console.log(date.getDate());
+// 0=일요일 ~ 6=토요일의 값이 리턴된다.
+const i = date.getDay();
+const days = [`일`, `월`, `화`, `수`, `목`, `금`, `토`];
+console.log(days[i]);
+
+console.log(date.getHours());
+console.log(date.getMinutes());
+console.log(date.getSeconds());
+```
+`날짜를 의미하는 문자열 반환받기`
+```js
+console.log(new Date().toDateString());
+// Mon Sep 12 2022
+```
+`ISO 8601 확장 형식`
+```js
+console.log(new Date().toISOString());
+// 2022-09-12T09:11:39.754Z
+```
+`형식 문자열을 사용해서 Date를 나타내는 문자열을 생성`
+```js
+console.log(new Date().toLocaleString());
+// 2022. 9. 12. 오후 6:12:46
+console.log(new Date().toLocaleString(`de-DE`));
+// 12.9.2022, 18:13:19
+console.log(new Date().toLocaleString(`ko-KR`));
+// 2022. 9. 12. 오후 6:13:19
+```
+`Date의 날짜 부분을 나타내는 문자열을 시스템에 설정된 현재 지역의 형식으로 반환`
+```js
+console.log(new Date().toLocaleDateString());
+// 2022. 9. 12.
+console.log(new Date().toLocaleDateString(`de-DE`));
+// 12.9.2022
+console.log(new Date().toLocaleDateString(`ko-KR`));
+// 2022. 9. 12.
+```
+`Date의 시간 부분을 나타내는 문자열을 시스템에 설정된 현재 지역의 형식으로 반환`
+```js
+console.log(new Date().toLocaleTimeString());
+// 오후 6:18:05
+console.log(new Date().toLocaleTimeString(`de-DE`));
+// 18:18:05
+console.log(new Date().toLocaleTimeString(`ko-KR`));
+// 오후 6:18:05
+```
+
+</div>
+
+## Date 활용하여 날짜 계산
+- timestamp -> 1970년 1월 1일 자정부터 현재까지 흐른 시간을 초단위로 환산한 값.
+- getTime()함수는 timestamp를 밀리세컨드단위로 환산하여 반환한다.
+
+`날짜 계산`
+```js
+const date = new Date();
+const ts1 = date.getTime();
+console.log(ts1); // 1662974458464
+```
+`몇일이 지났는지 계산하기`
+```js
+const date = new Date();
+const ts1 = date.getTime();
+const prevDate = new Date(date.getFullYear(),0,1);
+const ts2 = prevDate.getTime();
+const tmp1 = ts1 - ts2;
+console.log(tmp1);
+
+// 계산 결과를 원하는 단위로 환산 --> 24시간 * 60분 * 60초 * 1000
+// 과거의 시점으로부터 지나온 시간을 계산할 경우 소수점을 내린다. 
+const day1 = Math.floor(tmp1/ (24*60*60*1000));
+console.log(`올해는 ${day1} 일 지났습니다.`);
+```
+`몇일이 남았는지 계산하기`
+```js
+const ts1 = new Date().getTime();
+const nextDay = new Date(new Date().getFullYear(), 11, 31);
+const ts3 = nextDay.getTime();
+const tmp2 = ts3 - ts1;
+//미래의 시점으로 남은 시간을 계산할 경우 소수점을 올린다.
+const day2 = Math.ceil(tmp2/ (24*60*60*1000));
+console.log(`올해는 ${day2} 일 남았습니다.`);
+```
+
+`지금으로부터 30일 후`
+```js
+//단위가 수용할 수 있는 값이 초과될 경우 자동으로 올림 처리한다.
+const date = new Date();
+const a = date.getDate() + 30;
+date.setDate(a);
+console.log(date.toLocaleString(`ko-KR`));
+// 주의 할 점으로 새로운 date객체를 생성하며 진행할 경우 계산 결과가 맞지 않는다.
+```
+`30일이 지난 후에서 다시 100일 전을 계산`
+```js
+const date = new Date();
+const a = date.getDate() + 30;
+date.setDate(a);
+const b = date.getDate() - 100;
+date.setDate(b);
+console.log(date.toLocaleString(`ko-KR`));
+```
+`응용`
+```js
+// 오늘 날짜 객체
+const today = new Date();
+// 이번달의 1일로 이동
+today.setDate(1);
+// 이번달 1일에 대한 요일 인덱스
+const startDay = today.getDay();
+console.log(startDay);
+
+//이번달의 마지막날은 몇일인지 구함. -> 다음달의 0번째 날짜를 구함.
+const m = today.getMonth();
+today.setMonth(m+1);
+today.setDate(0);
+const lastDate = today.getDate();
+console.log(lastDate);
+
+//6행 7열의 빈 배열 만들기
+var data = new Array(6);
+for(let i =0; i< data.length; i++){
+    data[i] = new Array(7);
+}
+// 1씩 증가할 값
+let cnt = 1;
+for (let i = 0; i<data.length; i++){
+    for(let j = 0; j<data[i].length; j++){
+        if(i == 0 && j < startDay || cnt > lastDate){
+            data[i][j] = 0;
+        }else{
+            data[i][j] = cnt++;
+        }
+    }
+}
+for(let i =0; i< data.length; i++){
+    let str = ``;
+    for (let j=0; j<data[i].length; j++){
+        str += data[i][j] == 0 ? "\t" : (data[i][j] + "\t");
+    }
+    console.log(str);
+}
+```
+## Regex(정규표현식)
+- 문자열의 형식을 의미하는 수식
+- 문자열이 특정 조건을 충족하는지 검사하거나 특정 패턴의 문자열을 검색, 치환 하기 위해 사용함.
+- const 변수명 = /정규표현식/
+- 변수명.test(검사할 문자열) -> 문자열이 정규표현식에 부합할 경우 true를 반환함.
+
+```js
+// 회원가입시 입력받은 값을 가정한 변수
+// 사용자가 입력한 모든 내용은 문자열 변수이다.
+const username = `자바스크립트`;
+const age = `20`;
+const userid = `js1234`;
+
+//이름의 한글 입력 검사
+const pattern1 = /^[ㄱ-ㅎ가-힣]*$/;
+//username이 pattern1 정규식에 부합하지 않는다면?
+if(!pattern1.test(username)){
+    console.log(`이름은 한글만 입력 가능합니다.`);
+}
+
+// 나이의 숫자 입력 검사
+const pattern2 = /^[0-9]*$/;
+if(!pattern2.test(age)){
+    console.log(`나이는 숫자만 입력 가능합니다.`);
+}
+
+// 아이디의 영문+숫자 검사
+const pattern3 = /^[a-zA-Z0-9]*$/;
+if(!pattern3.test(userid)){
+    console.log(`아이디는 영어+숫자 조합으로만 입력 가능합니다.`);
+}
+
+// 아이디의 최대 글자 수 검사
+if(userid.length > 20){
+    console.log(`아이디는 최대 20자 까지만 입력 가능합니다.`);
+}
+
+console.log(`검사완료.`);
+```
+## Array
+<div markdown="1" class="primary--notice">
+
+`배열 원소 추가, 삭제, 변경 방법`
+```js
+const data = [10,20,30,40,50];
+data.push(60,70); // 배열 맨 끝에 요소 추가 (파라미터 제한 없음)
+console.log(data); // (7) [10, 20, 30, 40, 50, 60, 70]
+
+const k = data.pop(); // 마지막 요소를 리턴하고 제거
+console.log(k);  // 70
+console.log(data);  // (6) [10, 20, 30, 40, 50, 60]
+```
+
+</div>
