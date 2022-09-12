@@ -444,7 +444,150 @@ say.kor(); // 안녕 자바스크립트
 
 `오버라이드, super 예시`
 ```js
-
+class Terran{
+    #name;
+    #hp;
+    #dps;
+    constructor(name, hp, dps){
+        //모든 객체가 갖는 명시적 특성들을 맴버변수로 정의
+        this.#name = name;
+        this.#hp = hp;
+        this.#dps = dps;
+    }
+    get name(){
+        return this.#name;
+    }
+    set name(value){
+        this.#name = value;
+    }
+    get hp(){
+        return this.#hp;
+    }
+    set hp(value){
+        this.#hp = value;
+    }
+    get dps(){
+        return this.#dps;
+    }
+    set dps(vlaue){
+        this.#dps = value;
+    }
+    move(position){
+        console.log(`${this.name} 가 ${position}까지 이동합니다.`);
+    }
+    attack(target){
+        console.log(`${this.name}가 ${target}를 공격합니다. 데미지:${this.dps}`)
+    }
+}
+class Marine extends Terran{
+    //attack 메서드 override
+    attack(target){
+        //원래 부모의 기능도 호출.
+        super.attack(target);
+        console.log(`${this.name}가 ${target}에게 사격을 게시. 데미지:${this.dps}`);
+    }
+}
+class Tank extends Terran{
+    //ataack 메서드 override
+    attack(target){
+        super.attack(target);
+        console.log(`>>탱크 포격`);
+    }
+}
+class Firebat extends Terran{
+    //생성자 override
+    constructor(name){
+        super(name, 500, 50);
+    }
+}
+const m = new Marine("해병1", 120, 30);
+//자식 클래스에 의해 재정의된 기능 호출 --> 부모의 메서드는 가려진다.
+m.attack("질럿");
+const t = new Tank("탱크1", 120 ,30);
+t.attack(`드라군`);
+const f = new Firebat("화염방사병")
+f.attack("적");
+/**
+ * 해병1가 질럿를 공격합니다. 데미지:30
+ * 해병1가 질럿에게 사격을 게시. 데미지:30
+ * 탱크1가 드라군를 공격합니다. 데미지:30
+ * >>탱크 포격
+ * 화염방사병가 적를 공격합니다. 데미지:50
+*/
 ```
 ### 정적 맴버변수, 정적 메서드
+클래스에 속한 변수나 함수에 `static`키워드를 접목하면 객체 생성에 상관 없이 클래스 이름을 통해 항상 접근할 수 있는 정적 기능을 정의할 수 있다.  
+이렇게 정의된 정적 기능은 각 객체간의 공유 자원이 된다.
+
+### SingleTon 패턴
+객체의 인스턴스가 오직 1개만 생성되는 클래스 작성 패턴.  
+소프트웨어 디자인 패턴에서 싱글턴 패턴(Singleton pattern)을 따르는 클래스는, 생성자가 여러 차례 호출되더라도 실제로 생성되는 객체는 하나이고 최초 생성 이후에 호출된 생성자는 최초의 생성자가 생성한 객체를 리턴한다.  
+이와 같은 디자인 유형을 싱글턴 패턴이라고 한다.  
+주로 공통된 객체를 여러개 생성해서 사용하는 DBCP(DataBase Connection Pool)와 같은 상황에서 많이 사용된다.  
+> 인스턴스가 한 개만 존재하는 것을 보장하고 싶은 경우 싱글톤 패턴을 사용
+
+- 싱글톤 패턴의 사용 이유
+`메모리 측면`  
+  - 최초 한번의 new 연산자를 통해 고정된 메모리 영역을 사용하기 때문에 추후 해당 객체에 접근할 때 메모리 낭비를 방지할 수 있다.
+  - 이미 생성된 인스턴스를 활용하니 속도 측면에서도 이점이 있다.
+`데이터 공유가 쉬움`
+  - 싱글톤 인스턴스가 전역으로 사용되는 인스턴스이기 때문에 다른 클래스의 인스턴스들이 접근하여 사용할 수 있다.
+  
+- 싱글톤 클래스 작성 예시
+```js
+class Foo {
+    static current = null;
+    static getInstance(){
+        if(Foo.current === null){
+            Foo.current = new Foo();
+        }
+        return Foo.current;
+    }
+    // ... 이 클래스의 일반 생성자와 메서드들을 정의
+}
+```
+`싱글톤 객체 사용`  
+아래 코드에서 f1,f2,f3는 모두 Foo.current라는 단 하나의 객체를 공유해서 참조한다.
+```js
+ f1 = Foo.getInstance();
+ f2 = Foo.getInstance();
+ f3 = Foo.getInstance();
+```
+
+<div markdown="1" class="primary--notice">
+
+`싱글톤패턴 예시`
+```js
+class Calc{
+    static #current = null;
+    static getInstance(){
+        if(Calc.#current === null){
+            Calc.#current = new Calc();
+        }
+        return Calc.#current;
+    }
+    plus(x,y){
+        return x+y;
+    }
+    minus(x,y){
+        return x-y;
+    }
+    times(x,y){
+        return x*y;
+    }
+    div(x,y){
+        return x/y;
+    }
+}
+c1 = Calc.getInstance();
+console.log(c1.plus(10,20));
+
+c2 = Calc.getInstance();
+console.log(c2.minus(10,20));
+
+console.log(Calc.getInstance().times(10,20));
+console.log(Calc.getInstance().div(10,20));
+```
+</div>
+
 
