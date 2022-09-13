@@ -749,6 +749,7 @@ console.log(arr); // (5) [5, 4, 3, 2, 1]
 - 최초 실행시 accumulator에는 0 번째 원소인 1이 전달되고 currentValue(현재 값)에는 1번째 원소인 2가 전달되며, index는 currentValue에 대한 1이 전달된다.
 - 두 번째 실행부터 accumulator에는 이전 회차에서 리턴한 값이 되돌아온다. 그리고 currentValue에는 2번째부터 순서대로 매 실행회차마다 다음 원소가 전달된다.
 - 즉, reduce는 배열의 모든 원소를 탐색하면서 누적 결과를 만들고자 할 경우 사용한다.
+
 ```js
 const arr = [1,2,3,4,5];
 const result = arr.reduce((accumulator, currentValue, index, array) =>{
@@ -787,6 +788,7 @@ console.log(`result3 = ${result3}`)
  result3 = 17
 */
 ```
+
 `응용`
 ```js
 const covid19 = [
