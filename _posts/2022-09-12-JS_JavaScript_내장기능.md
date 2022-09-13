@@ -660,9 +660,11 @@ const arr = [10,20,30,40,50];
 const hello = arr.map((v,i)=> v * 10 );
 console.log(hello); // (5) [100, 200, 300, 400, 500]
 ```
+
 `find (배열 검색)`
 - 주어진 판별함수를 만족하는 첫번째 값을 반환한다. 못찾으면 undefined를 반환한다.
 - 찾고자 하는 항목이 아닌 검색 규칙을 구현한 콜백함수를 전달해야 한다. 
+
 ```js
 const arr = [5,12,8,131,44];
 const found = arr.find((v)=>{
@@ -681,8 +683,11 @@ const found = arr.find((v)=>{
 });
 console.log(found);
 ```
+
 순서 : 5 대입 -> 12 대입 (return true) -> found값 : 12 -> 종료  
+  
 `응용`
+
 ```js
 // forEach를 사용해 배열에서 특정 조건을 충족하는 원소 추출.
 const arr = [5,12,8,131,44];
@@ -709,6 +714,7 @@ const d2 = arr2.filter(function(v,i,arr) {
 });
 console.log(d2); // (3) [12, 8, 44]
 ```
+
 `배열 정렬`
 - 퀵정렬 알고리즘을 사용하여 배열 자체를 정렬한다.
 - 배열의 모든 원소를 문자열로 취급하기 때문에 글자 정렬기준이 적용된다.
@@ -735,6 +741,7 @@ console.log(arr);
  (3) [1, 2, 15]
  */
 ```
+
 `역순배치`
 ```js
 let arr = [1,2,3,4,5];
