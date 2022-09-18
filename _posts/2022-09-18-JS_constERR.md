@@ -10,7 +10,7 @@ tags:
 last_modified_at: 2022-09-18
 ---
 ## 에러 발생 코드
-![](../assets/images/ERR_img/constant.png)
+![](https://user-images.githubusercontent.com/105098581/190885652-5a480a51-1d23-4568-b1e4-74c80e365637.png)
 
 ## 에러 원인
 
