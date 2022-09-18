@@ -4,9 +4,9 @@ execrpt: "js ERR"
 toc: true
 toc_sticky: true
 categories:
-  - JS
+  - err
 tags:
-  - JS
+  - err
 last_modified_at: 2022-09-18
 ---
 ## 에러 발생 코드
