@@ -4,7 +4,7 @@ execrpt: "GET, POST 간단설명"
 toc: true
 toc_sticky: true
 categories:
-  - JS
+  - clone
 tags:
   - JS
   - HTML

@@ -4,7 +4,7 @@ execrpt: "nodeJS & npm & express 설명"
 toc: true
 toc_sticky: true
 categories:
-  - JS
+  - clone
 tags:
   - JS
   - nodejs
