@@ -79,6 +79,8 @@ if(agent.indexOf("검사할단어") > -1){
 [location_mdn](https://developer.mozilla.org/ko/docs/Web/API/Location)
 location 인터페이스는 객체가 연결된 장소(URL)를 표현한다.  
 >예시 주소 : http://localhost:5500/location.html?name=helloworld&age=20#info
+  
+
 - 문서의 URL 주소 : `location.href` -> http://localhost:5500/location.html?name=helloworld&age=20#info
 - 호스트 이름과 포트 : `loacation.host` -> localhost:5500
 - 호스트 컴퓨터 이름 : `location.hostname` -> localhost
