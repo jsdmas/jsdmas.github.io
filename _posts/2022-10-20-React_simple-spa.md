@@ -56,7 +56,8 @@ const App = () =>{
         // GET파라미터 사용
         <Route path="/department_get" element={<DepartmentGet/>} />
         // Path 파라미터는 URL 형식에 변수의 위치와 이름을 정해줘야 한다.
-        <Route path="/department_path/:id/:msg" element={<DepartmentGet>} />
+
+        <Route path="/department_path/:id/:msg" element={<DepartmentGet />} /> 
         </Routes>
         </div>
     );
