@@ -9,6 +9,7 @@ tags:
   - React
 last_modified_at: 2022-10-20
 ---
+
 리엑트 프로젝트 생성 방법(프로젝트 이름은 영어 소문자만 사용 가능)  
 > yarn create react-app 프로젝트이름
 
@@ -31,6 +32,7 @@ JS코드가 비대해 질 수 있다. 코드 스플리팅 기법으로 해결가
 ## 예시
 `App.js`
 ```js
+import React from "react";
 const App = () =>{
     return(
         <div>
