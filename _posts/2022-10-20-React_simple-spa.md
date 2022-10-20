@@ -31,7 +31,7 @@ JS코드가 비대해 질 수 있다. 코드 스플리팅 기법으로 해결가
 
 ## 예시
 `App.js`
-```js
+```jsx
 import React from "react";
 const App = () =>{
     return(
