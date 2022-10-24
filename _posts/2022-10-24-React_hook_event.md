@@ -4,9 +4,9 @@ execrpt: "hook 에대한 예제&설명"
 toc: true
 toc_sticky: true
 categories:
-  - JS
+  - React
 tags:
-  - JS
+  - React
 last_modified_at: 2022-10-24
 ---
 ## 리액트 이벤트 시스템
