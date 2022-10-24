@@ -29,10 +29,11 @@ JS코드가 비대해 질 수 있다. 코드 스플리팅 기법으로 해결가
 하나의 HTML이므로 SEO에 취약하다 (서버사이드 렌더링으로 해결 가능, SEO:검색엔진최적화)  
 서버사이드 랜더링 = React + Node / React + PHP / React + Java(Spring)
 
-## 예시
+## Route 사용 예시
 `App.js`
 ```jsx
 import React from "react";
+
 const App = () =>{
     return(
         <div>
@@ -63,3 +64,4 @@ const App = () =>{
     );
 };
 ```
+

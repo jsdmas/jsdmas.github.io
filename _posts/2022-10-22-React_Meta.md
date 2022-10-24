@@ -32,6 +32,5 @@ last_modified_at: 2022-10-22
 <link rel="icon" href="데스크탑 favicon" type="image/png" />
 <link rel="shortcut icon" href="안드로이드용 favicon" type="image/png" />
 <link rel="apple-touch-icon" href="아이폰용 favicon" type="image/png" />
-
 ```
 
