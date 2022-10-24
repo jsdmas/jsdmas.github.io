@@ -98,7 +98,7 @@ useEffect는 기본적으로 렌더링 직후마다 실행되며,
 두 번쨰 파라미터 배열에 무엇을 넣는지에 따라 실행되는 조건이 달라진다.  
 > 클래스형 컴포넌트의 componentDidMount와 componentDidUpdate를 합친 형태
   
-<div markdown="1" class="notice-primary">
+<div markdown="1" class="primary-notice">
 
 `랜더링 될 때마다 실행되는 함수 정의`  
 최초 등장하거나 state값이 변경될 때 모두 실행된다.
