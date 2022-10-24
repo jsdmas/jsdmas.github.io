@@ -98,7 +98,7 @@ useEffect는 기본적으로 렌더링 직후마다 실행되며,
 두 번쨰 파라미터 배열에 무엇을 넣는지에 따라 실행되는 조건이 달라진다.  
 > 클래스형 컴포넌트의 componentDidMount와 componentDidUpdate를 합친 형태
   
-<div markdown="1" class="primary-notice">
+<div markdown="1" class="notice--primary">
 
 `랜더링 될 때마다 실행되는 함수 정의`  
 최초 등장하거나 state값이 변경될 때 모두 실행된다.
@@ -138,3 +138,11 @@ useEffect(()=>{
 ```
 </div>
 
+### useRef
+함수형 컴포넌트에서 ref를 쉽게 사용할 수 있도록 처리해 준다.
+Vanilla Script에서 `document.getElementById(...)`나 `document.querySelector(...)`로 DOM 객체를 취득하는 과정을 React 스타일로 포현한 것으로 이해할 수 있다.
+
+### useReducer
+useState 보다 더 다양한 컴포넌트 상황에 따라 다양한 상태를 다른 값으로 업데이트 하고자 하는 경우 사용.  
+useState의 대체 함수로 이해할 수 있다.  
+state값이 다수의 하위값을 포함하거나 이를 활용하는 복잡한 로직을 만드는 경우에 useState보다 useReducer를 선호한다.
