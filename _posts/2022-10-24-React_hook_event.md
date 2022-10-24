@@ -1,6 +1,6 @@
 ---
 title: "React_hook기본 설명"
-execrpt: "hook 예제&설명"
+execrpt: "hook, useEffect ,useRef, useReducer 예시&설명"
 toc: true
 toc_sticky: true
 categories:
@@ -71,6 +71,15 @@ const [상태변수, 변수에대setter함수] = React.useState(초기값);
         // 즉, 이벤트가 발생한 자신 (여기서는 input태그)
         setMyName(e.currentTarget.value);
     };
+
+    /**
+     * 상태값이 변경될때마다 컴포넌트 함수는 매번 재실행된다
+     * 그러므로 컴포넌트 영역은 상태값의 변경에 따라 반복적으로 다시 랜더링 된다.
+     * --> 결국 아래의 출력문은 상태값이 변경될 때마다 반복 출력된다.
+     * 상태값은 화면에 출력될 변수에만 사용해야 한다. 
+     */
+    console.log(new Date());
+
     return(
     <div>
         <h2>MyState</h2>
@@ -140,9 +149,153 @@ useEffect(()=>{
 
 ### useRef
 함수형 컴포넌트에서 ref를 쉽게 사용할 수 있도록 처리해 준다.
-Vanilla Script에서 `document.getElementById(...)`나 `document.querySelector(...)`로 DOM 객체를 취득하는 과정을 React 스타일로 포현한 것으로 이해할 수 있다.
+Vanilla Script에서 `document.getElementById(...)`나 `document.querySelector(...)`로 DOM 객체를 취득하는 과정을 React 스타일로 포현한 것으로 이해할 수 있다.  
+예시  
+`components/MyBox`  
+부모로부터 전달받은 ref 참조변수를 받기 위해 "React.forwardRef" hook에 대한 콜백으로 컴포넌트를 구현한다.  
+이렇게 구현된 컴포넌트는 props와 부모로부터 전달받은 ref 참조변수를 파라미터로 주입받는다.
+```jsx
+const MyBox = React.forwardRef((props, ref)=>{
+    const containerStyle = {
+        border: `1px solid black`,
+        height: `100px`,
+        width: `100px`,
+    };
+    // 부모로부터 전달받은 ref 참조변수를 <div>에 연결한다.
+    // 이 참조변수를 통해 부모 컴포넌트가 ref 참조변수가 연결된 <div>의 DOM에 접근할 수 있다.
+    return(
+        <div style={containerStyle} ref={ref}>
+        </div>
+    );
+});
+```
+`MyRef.js`
+```jsx
+import MyBox from 'MyBox';
+
+/**
+ * React에서 document.getElementById(...)에 해당하는 기능을 사용하는 방법
+ */ 
+const MyRef = () => {
+    // HTML 태그를 react 안에서 참조할 수 있는 변수를 생성
+    const myDname = React.useRef();
+    const myLoc = React.useRef();
+    const myResult = React.useRef();
+
+    // 컴포넌트에 설정하기 위한 ref
+    const myBoxRef = React.useRef();
+
+    // 화면에 출력되지 않은 상태변수를 생성할 수 있다.
+    // useRef()함수에 전달하는 파라미터가 상태변수의 기본값이 된다.
+    const myValue = React.useRef(0);
+
+    // 이 컴포넌트가 다시 랜더링되었음을 확인하기 위한 시간 출력
+    console.log(new Date());
+
+    return(
+        <div>
+            <h2>MyRef</h2>
+            <h3>ref 기본 사용 방법</h3>
+            // 미리 준비한 컴포넌트 참조변수와 HTML 태그를 연결
+            <div>
+                <label htmlFor="dname">학과명 : </label>
+                <input type="text" ref={myDname} id="dname" />
+            </div>
+            <div>
+                <label htmlFor="loc">학과위치</label>
+                <input type="text" ref={myLoc} id="loc" />
+            </div>
+            <p>
+                입력값 확인: <span ref={myResult}><span>
+            </p>
+            
+            <button onClick={e=>{
+                // 컴포넌트 참조변수를 사용하여 다른 HTML 태그에 접근 가능
+                // --> "참조변수.current" 해당 HTML을 의미하는 Javascript DOM 객체
+                // --> myDname.current와 document.querySelector(...), document.getElementById(...)등으로 생성한 객체가 동일한 DOM객체이다.
+                const dname = myDname.current.value;
+                const loc = myLoc.current.value;
+                myResult.current.innerHTML = `${dname}, ${loc}`;
+            }}>클릭</button>
+
+            <button onClick={e => {
+                // 이 변수는 갱신되더라도 컴포넌트 함수를 다시 실행시키지 않는다.
+                myValue.current++;
+                console.log(`myValue=${myValue.current}`);
+            }}>Ref 상태변수 갱신</button>
+
+            <hr />
+            <h3>컴포넌트에 ref 적용하기</h3>
+            {/* ref 참조변수를 컴포넌트에 전달한다. */}
+            <MyBox ref={myBoxRef} />
+
+            <button type='button' onClick={() => {
+                // <MyBox>를 통해 myBoxRef를 주입받은 DOM에 접근하여 제어함.
+                myBoxRef.current.style.backgroundColor = "#f00";
+            }}>Red</button>
+
+            <button type='button' onClick={() => {
+                // <MyBox>를 통해 myBoxRef를 주입받은 DOM에 접근하여 제어함.
+                myBoxRef.current.style.backgroundColor = "#00f";
+            }}>Blue</button>
+        </div>
+    )
+}
+```
 
 ### useReducer
 useState 보다 더 다양한 컴포넌트 상황에 따라 다양한 상태를 다른 값으로 업데이트 하고자 하는 경우 사용.  
 useState의 대체 함수로 이해할 수 있다.  
-state값이 다수의 하위값을 포함하거나 이를 활용하는 복잡한 로직을 만드는 경우에 useState보다 useReducer를 선호한다.
+state값이 다수의 하위값을 포함하거나 이를 활용하는 복잡한 로직을 만드는 경우에 useState보다 useReducer를 선호한다.  
+`예시`
+```jsx
+import React from 'react';
+
+/**
+ * useReduce에 의해 호출될 사용자 정의 함수.
+ * --> action값이 OO일 떄 state값을 ~~해라.
+ * --> action값의 DataType은 개발자가 결정할 수 있다. (int, string, boolean, json ...)
+ * --> state값의 DataType역시 개발자가 결정할 수 있다. (int, string, boolean, json ...)
+ * @param {int} state - 상태값 (useState의 state값과 동일)
+ * @param {string} action - 어떤 동작인지에 대한 구분
+ */
+
+function setCounterValue(state, action) {
+    console.log(`${action}, ${state}`);
+    // action값의 상태에 따른 state값의 가공 처리를 분기
+    switch (action) {
+        case `HELLO`:
+            return state + 1;
+        case "WORLD":
+            return state - 1;
+        default:
+            return 0;
+    }
+}
+
+const MyReducer = () => {
+
+    /**
+     * 상태값(myCounter)와 상태값 갱신함수 (setMyCounter)를 정의한다.
+     * -> setCounterValue: setMyCounter()가 호출됨에 따라 간접적으로 호출될 함수
+     * -> 0: myCounter에 저장될 초기값
+     * 
+     * setMyCounter()함수에게 action값을 전달하면
+     * React 내부적으로 setCounterValue()함수가 호출되며,
+     * 상태값으로 지정된 myCounter와 "HELLO"|"WORLD"가 파라미터로 전달된다.
+     */
+
+    const [myCounter, setMyCounter] = React.useReducer(setCounterValue, 0);
+    return (
+        <div>
+            <h2>MyReducer</h2>
+            <p>현재 카운트 값: {myCounter}</p>
+            <button type='button' onClick={e => setMyCounter(`HELLO`)}>UP</button>
+            <button type='button' onClick={e => setMyCounter(`WORLD`)}>DOWN</button>
+            <button type='button' onClick={e => setMyCounter(``)}>RESET</button>
+        </div>
+    );
+};
+
+export default MyReducer;
+```
