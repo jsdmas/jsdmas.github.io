@@ -1,6 +1,6 @@
 ---
 title: "React_hook기본 설명"
-execrpt: "hook, useEffect ,useRef, useReducer 예시&설명"
+execrpt: "hook, useEffect ,useRef, useReducer, useMemo, useCallback 예시&설명"
 toc: true
 toc_sticky: true
 categories:
@@ -33,6 +33,10 @@ last_modified_at: 2022-10-24
 
 ## Hooks
 함수형 컴포넌트에서 상태값(state)를 관리하기 위한 기능으로 클래스형 컴포넌트의 LifeCycle에 대응된다.  
+**Hook 사용시 주의사항**  
+1. 반복문, 조건문, 중첩된 함수 내에서 Hook을 실행할 수 없다.
+2. React Component 내에서만 호출할 수 있다.
+
 ### 상태변수의 이해
 시스템의 상태공간이라는 것은 어떤 지정된 시간에서 시스템의 상태를 완전하게 서술하는 데 필요한 임의의 최소 변수의 집합이다. 이와 같이 시스템을 정의할 수 있는 임의의 최소 변수들을 상태변수라고 한다.  
 ![](https://user-images.githubusercontent.com/105098581/197465044-fbc58170-6bb7-43ef-a263-d52da281f8df.png)  
@@ -298,4 +302,87 @@ const MyReducer = () => {
 };
 
 export default MyReducer;
+```
+
+### useMemo
+함수형 컴포넌트 내에서의 연산 최적화.  
+숫자, 문자열, 객체처럼 일반 값을 재사용하고자 할 경우 사용한다.  
+> memoized 된 값을 반환한다. : 컴퓨터 프로그램에 동일한 계산을 반복해야 할 때, 이전에 계산한 값을 메모리에 저장함으로써 동일한 계산의 반복 수행을 제거하여 프로그램 실행 속도를 빠르게 하는 기술
+
+```jsx
+import dayjs from 'dayjs';
+
+const MyMemo = () =>{
+
+    // 파라미터로 전달되는 단어의 길이를 반환하는 함수 --> 처리비용이 매우 큰 함수를 가정함.
+    const getLength = w => {
+        return w.length;
+    }
+
+    // 처리할 단어들
+    const words = ['City', 'Eye', 'Apple', 'Apple', 'Orange'];
+
+    // 버튼이 눌러진 횟수
+    const [myCount, setMyCount] = React.useState(0);
+    // 배열의 탐색 위치
+    const [myIndex, setMyIndex] = React.useState(0);
+    // 출력할 글자
+    const [myWord, setMyWord] = React.useState(words[myIndex]);
+
+    /** A(myWord)라는 상태값이 변경된 경우 B(myLen)라는 상태값도 갱신하는 처리 */
+    /**
+     * 두 번째 파라미터인 배열에 설정된 state값이 이전 상태와 다를 경우에만 콜백을 실행한다.
+     * 콜백의 결과가 저장되는 myLen은 일반 상태값과 동일하게 사용할 수 있다.
+     * 즉, myWord가 변경될 때만 콜백이 리턴하는 값을 활용하여 myLen을 갱신한다.
+     */
+
+    const myLen = React.useMemo(()=>{
+        return getLength(myWord);
+    }, [myWord]);
+
+    return(
+        <div>
+            <h2>MyMemo</h2>
+            <p>
+                {myIndex}번째 단어 {myWord}의 길이 : {myLen}
+            </p>
+            <button
+                onClick={()=>{
+                    const next = (myIndex + 1) % words.length;
+                    setMyIndex(next);
+                    setMyCount(myCount+1);
+                    setMyWord(words[next]);
+                }}>버튼 클릭</button>
+        </div>
+    );
+
+};
+```
+
+### useCallback
+렌더링 성능 최적화에 사용됨.  
+이벤트 핸들러 함수를 필요한 경우에만 생성할 수 있다.
+> memoized 된 콜백을 반환한다.
+
+```jsx
+const MyCallback = () =>{
+    const [myText, setMyText] = React.useState('Hello React');
+
+    /**
+     * 컴포넌트가 최초 렌더링될 떄 1회만 이벤트 핸들러 함수를 정의하고 이후 부터는 계속적으로 재사용된다.
+     * 만약 두 번쨰 파라미터인 배열에 특정 state값을 지정할 경우 해당 값이 수정될 떄만 이벤트가 정의된다.
+     * --> 이벤트 핸들러의 중복 정의를 방지해서 성능 향상을 꾀함.
+     */
+    const onInputChange = React.useCallback((e) => {
+        setMyText(e.currentTarget.value);
+    }, []);
+
+    return (
+        <div>
+            <h2>MyCallback</h2>
+            <h3>{myText}</h3>
+            <input type="text" placeholder='input...' onChange={onInputChange} />
+        </div>
+    );
+}
 ```
