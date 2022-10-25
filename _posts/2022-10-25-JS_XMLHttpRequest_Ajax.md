@@ -1,8 +1,6 @@
 ---
 title: "XMLHttpRequest_Ajax 개념설명 & 예제"
 execrpt: "Ajax 개념"
-toc: true
-toc_sticky: true
 categories:
   - JS
 tags:
