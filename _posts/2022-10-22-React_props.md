@@ -7,14 +7,46 @@ categories:
   - React
 tags:
   - React
-last_modified_at: 2022-10-22
+last_modified_at: 2022-11-04
 ---
 ## props
 - 컴포넌트를 사용하는 부모로부터 전달받는 변수값이 포함되어 있는 객체
-- 필요한 경우에만 선언한다.
 - 흔히 컴포넌트에게 HTML 속성 같은 형태로 전달된다.
 [React_Components와 Props](https://ko.reactjs.org/docs/components-and-props.html)  
-자세한 내용은 위의 링크에서 확인.  
+- Props는 일종의 방식이다. 부모 컴포넌트로부터 자식 컴포넌트에 데이터를 보낼 수 있게 해주는 방법.
+  
+**간단한 예시**
+```jsx
+function Btn(props){
+          //{banana} --> property를 오브젝트로부터 꺼내서 간단히 사용 가능
+
+
+    console.log(props);
+    //banana='Hello' x={8} , banana='potato' 라고 오브젝트를  출력해준다.
+    return(
+        <button
+            style={{
+                backgroundColor:'tomato',
+                color:'white',
+                border:0,
+                borderRadius:10,
+            }}
+        >{props.banana} </button>
+        //{banana} --> 주석에 있는데로 썻다면 props 생략가능.(대부분 이렇게 쓴다.)
+    );
+}
+
+function App(){
+    return(
+        <div>
+            <Btn banana='Hello' x={8}/>
+            <Btn banana='potato'>
+        </div>
+    );
+}
+
+```
+
 
 ## Components 예시
 
