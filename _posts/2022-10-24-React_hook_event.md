@@ -7,7 +7,7 @@ categories:
   - React
 tags:
   - React
-last_modified_at: 2022-10-24
+last_modified_at: 2022-11-04
 ---
 ## 리액트 이벤트 시스템
 - 용어정리  
@@ -109,6 +109,10 @@ const [상태변수, 변수에대setter함수] = React.useState(초기값);
 ### useEffect
 useEffect는 기본적으로 렌더링 직후마다 실행되며,  
 두 번쨰 파라미터 배열에 무엇을 넣는지에 따라 실행되는 조건이 달라진다.  
+- useEffect는 두 개의 argument를 가지는 function이다.
+- 첫 번째 argument는 사용자가 딱 한번만 실행하고 싶은 코드가 될 것이다.
+- 두 번쨰 argument는 사용자가 원하는 값(state,props...)이 변경될 때만 호출하도록 설정 가능하다.
+- 두 번쨰 argument에는 값을 여러개 넣는것이 가능하다.
 > 클래스형 컴포넌트의 componentDidMount와 componentDidUpdate를 합친 형태
   
 <div markdown="1" class="notice--primary">
@@ -121,7 +125,8 @@ useEffect(()=>{
 });
 ```
 `업데이트시에는 생략되는 함수 정의`  
-컴포넌트가 마운트 될 때 최초 1회만 실행된다. (state값이 변경될 때는 실행되지 않는다.)
+컴포넌트가 마운트 될 때 최초 1회만 실행된다. (state값이 변경될 때는 실행되지 않는다.)  
+빈 배열은 감시할 것이 없기때문에 React내에서 한번만 실행하게 되는 것.
 ```jsx
 useEffect(()=>{
     // ... 처리할 코드 ...

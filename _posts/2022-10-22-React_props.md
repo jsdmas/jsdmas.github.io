@@ -14,6 +14,7 @@ last_modified_at: 2022-11-04
 - 흔히 컴포넌트에게 HTML 속성 같은 형태로 전달된다.
 [React_Components와 Props](https://ko.reactjs.org/docs/components-and-props.html)  
 - Props는 일종의 방식이다. 부모 컴포넌트로부터 자식 컴포넌트에 데이터를 보낼 수 있게 해주는 방법.
+- prop을 전달할 떄의 이름과 받아서 사용할 떄의 이름은 동일해야 한다.
   
 **간단한 예시**
 ```jsx
