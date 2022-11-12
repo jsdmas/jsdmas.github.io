@@ -186,3 +186,194 @@ export default Circle;
 ## Optional Props
 
 위의 코드들은 값을 반드시(Required) 넣어줘야 했다. 하지만 필수가아닌 선택적(optional)이도록 만들고 싶다면 아래처럼 사용하면 된다.
+
+```tsx
+// ~~~App.tsx~~~
+import React from 'react';
+import Circle from './Circle';
+
+const App = () => {
+  return (
+    <div>
+      <Circle borderColor="black" bgColor="teal" />
+      <Circle bgColor="tomato" text='hello world' />
+    </div>
+  );
+};
+
+export default App;
+
+// ~~~Circle.tsx~~~
+import React from "react";
+import styled from "styled-components";
+
+interface ContainerProps {
+    bgColor: string;
+    borderColor: string;
+}
+
+const Container = styled.div<ContainerProps>`
+    width: 200px;
+    height: 200px;
+    background-color: ${props => props.bgColor};
+    border-radius: 100px;
+    // styled-componet 에선 borderColor가 required 상태이기 때문에 
+    // 아래와 같이 색상을 반드시 지정해 줘야 한다.
+    border: 5px solid ${props => props.borderColor};
+`;
+
+interface CircleProps {
+    // TypeScript에게 object shape를 설명해준다.
+    bgColor: string;
+    // borderColor가 없을수도(optional) 있다고 말해준다.
+    // 다른방법 -> borderColor : string | undefined; -> 아래 코드와 같은 의미이다.
+    borderColor?: string;
+    text?: string;
+}
+
+const Circle = ({ bgColor, borderColor, text = "Default Text" }: CircleProps) => {
+    return <Container bgColor={bgColor} borderColor={borderColor ?? bgColor}>{text}</Container>
+    // borderColor={borderColor ?? bgColor} -> string | undefined
+    // 만약 borderColor가 있다면 borderColor를 사용하고 만약 없다면 bgColor를 사용하라.
+}
+
+export default Circle;
+```
+
+## State
+
+React 에서 useState hook을 사용하면 TypeScript는 초기값을 추론해서 데이터타입을 정해준다.  
+만약 state값이 string이였다가 number로 바뀌거나 값을 2가지를 가져야 하는 상황이 온다면 아래처럼 사용해 주면된다.  
+```tsx
+const [value, setValue] = useState<number| string>(0);
+setValue(2);
+setValue("hello");
+setValue(true);//  -->  오류발생
+```
+
+## Forms
+- any타입은 어떤 것이든 될 수 있다는 것이다.
+- any타입을 배제하고자 노력해야한다.
+- 아래는 event들에 타입을 추가하는 예시이다.
+
+```tsx
+import React, { useState } from 'react';
+
+const App = () => {
+
+  const [value, setValue] = useState("");
+  // React.FormEvent<HTMLInputElement>
+  // React 에서 FormEvent 발생시 어떤종류의 Element가 이 onChange 이벤트를 발생시킬지를 특정할 수 있다.
+  // 타입스크립트는 onChange 함수가 InputElement에 의해서 실행 될 것을 알게된다.
+  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const {
+      // 이벤트 안의 currnetTarget.value 값을 얻어온다.
+      currentTarget: { value },
+    } = event;
+    setValue(value);
+  }
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(`hello ${value}`);
+  }
+
+  return (
+    <div>
+      <form onSubmit={onSubmit}>
+        <input type='text' placeholder='username...' value={value} onChange={onChange} />
+        <button type='submit'>Log In</button>
+      </form>
+    </div>
+  );
+};
+
+export default App;
+```
+
+## Themes
+
+1. declaration(선언)파일 만들기 (d.ts -> declaration.ts)
+    - 이 파일은 이전에 설치해 놓은 이 파일을 override(덮어쓰기) 한다.
+
+
+**styled.d.ts**  
+
+```ts
+import "styled-components";
+
+// and extend them!
+// styled-components의 테마 정의를 확장한다.
+declare module 'styled-components' {
+    export interface DefaultTheme {
+        textColor: string;
+        bgColor: string;
+    }
+}
+```
+
+2. theme 만들기
+    - 테마는 위의 정의 파일 속 속성들과 같아야한다.
+
+**theme.ts**   
+
+```ts
+import { DefaultTheme } from "styled-components";
+
+export const lightTheme: DefaultTheme = {
+    bgColor: "white",
+    textColor: "black",
+};
+
+export const darkTheme: DefaultTheme = {
+    bgColor: "black",
+    textColor: "white",
+};
+```
+
+3. index.tsx에 ThemeProvider import
+
+```tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+import { ThemeProvider } from 'styled-components';
+import { lightTheme } from "./theme";
+import { darkTheme } from './theme';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+  <ThemeProvider theme={darkTheme}>
+    <App />
+  </ThemeProvider>
+);
+```
+
+4. App.tsx 에서 Theme 사용
+
+```tsx
+import React from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  background-color: ${props => props.theme.bgColor};
+  color: ${props => props.theme.textColor};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+`;
+
+
+const App = () => {
+  return (
+    <Container>
+      <h1>Hello World!</h1>
+    </Container>
+  );
+};
+
+export default App;
+```
+
