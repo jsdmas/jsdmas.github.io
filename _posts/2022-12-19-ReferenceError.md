@@ -2,9 +2,9 @@
 title: "ReferenceError"
 execrpt: "referenceError 설명"
 categories:
-  - Node
+  - err
 tags:
-  - Node
+  - err
 last_modified_at: 2022-12-19
 ---
 
