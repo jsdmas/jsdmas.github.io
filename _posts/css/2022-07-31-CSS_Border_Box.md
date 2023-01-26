@@ -4,7 +4,7 @@ excerpt: "요소의 너비와 높이 계산방법"
 header:
     teaser : /assets/images/CSS3_logo_and_wordmark.jpg
 categories:
-  - HTML&CSS
+  - CSS
 tags:
   - CSS
 last_modified_at: 2022-07-31
