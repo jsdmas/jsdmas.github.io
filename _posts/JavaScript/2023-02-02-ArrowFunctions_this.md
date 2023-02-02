@@ -9,6 +9,7 @@ last_modified_at: 2023-02-02
 ---
 
 arrow function을 사용하지 않아야할 때가 있다.
+[MDN-Arrow_functions](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 ```js
 const button = document.querySelector("button");
