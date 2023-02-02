@@ -21,7 +21,8 @@ styled`
 
 위의 함수는 string인 하나의 argument가 나온다.  
 
-위의 특성을 활용하여 아래의 예제를 만들어 보았다.
+위의 특성을 활용하여 아래의 예제를 만들어 보았다.  
+
 
 <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="BaPvBKL" data-user="jsdmas" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/jsdmas/pen/BaPvBKL">
