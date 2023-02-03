@@ -558,7 +558,7 @@ class Foo {
  f3 = Foo.getInstance();
 ```
 
-<div markdown1" class="--notice--primary">
+<div markdown="1" class="--notice--primary">
 
 `싱글톤패턴 예시`
 ```js
