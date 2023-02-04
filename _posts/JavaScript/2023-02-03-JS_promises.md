@@ -7,7 +7,7 @@ categories:
   - JS
 tags:
   - JS
-last_modified_at: 2023-02-03
+last_modified_at: 2023-02-04
 ---
 
 Promise 객체는 비동기 작업이 맞이할 미래의 완료 또는 실패와 그 결과 값을 나타냅니다.  
@@ -159,6 +159,42 @@ response (응답)
 response.json() : 응답처리된 data를 json으로 변환해준다.
 ![](https://user-images.githubusercontent.com/105098581/216508408-850f1d5a-37dd-4d17-a23a-ebe5ab495895.png)
 
+
+# promise.allSettled()
+[MDN-promise.allSettled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled)  
+
+promise.allSettled는 promise.all 과는 다르게 모든 promise가 성공할 필요는 없다.  
+단지 promise가 끝나기만 하면 된다.(에러가 있던 없던 상관없이)  
+
+```js
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve, reject) => setTimeout(reject, 100, 'foo'));
+const promises = [promise1, promise2];
+
+Promise.allSettled(promises).
+  then((results) => results.forEach((result) => console.log(result.status)));
+
+// Expected output:
+// "fulfilled"
+// "rejected"
+```
+
+# promise.any()
+[MDN-promise.any](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any)  
+여러개의 promise들 중에 하나라도 끝이 나면 다음으로 넘어간다.  
+만약 아무것도 끝나지 않았다면 aggregate error라는 에러가 발생한다.  
+
+```js
+const promise1 = Promise.reject(0);
+const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'quick'));
+const promise3 = new Promise((resolve) => setTimeout(resolve, 500, 'slow'));
+
+const promises = [promise1, promise2, promise3];
+
+Promise.any(promises).then((value) => console.log(value));
+
+// Expected output: "quick"
+```
 
 
 
