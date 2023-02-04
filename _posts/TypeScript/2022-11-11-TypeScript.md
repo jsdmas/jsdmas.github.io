@@ -16,6 +16,7 @@ last_modified_at: 2022-11-11
 - strongly- typed 언어이다 : 프로그래밍 언어가 작동하기 전에 type을 확인한다.
 - 코드에 실수가 있어도, 프로그램이 작동하기 전에 TypeScript가 알려준다.
 - [TypeScript](https://www.typescriptlang.org/)
+- [What is TypeScript?](https://www.samsungsds.com/kr/insights/typescript.html)
 
 ## DefinitelyTyped
 - [install TypeScript](https://www.typescriptlang.org/download)
