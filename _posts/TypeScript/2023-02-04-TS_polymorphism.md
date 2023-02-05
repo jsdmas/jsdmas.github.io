@@ -5,7 +5,7 @@ categories:
   - TypeScript
 tags:
   - TypeScript
-last_modified_at: 2023-02-04
+last_modified_at: 2023-02-05
 ---
 
 # polymorephism(다형성)
