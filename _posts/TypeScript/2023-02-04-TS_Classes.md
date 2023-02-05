@@ -1,6 +1,6 @@
 ---
 title: "TS Classes"
-execrpt: "TypeScript Classe 설명"
+execrpt: "TypeScript Class 설명"
 categories:
   - TypeScript
 tags:
