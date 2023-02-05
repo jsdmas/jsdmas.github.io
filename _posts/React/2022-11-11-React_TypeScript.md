@@ -1,10 +1,10 @@
 ---
-title: "TypeScript 기초 설명"
+title: "TypeScript & React.js "
 execrpt: "TypeScript 설명"
 toc: true
 toc_sticky: true
 categories:
-  - TypeScript
+  - React
 tags:
   - TypeScript
   - React
