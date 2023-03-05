@@ -1,156 +1,168 @@
 ---
-title:  "JS Math, filter 설명"
-excerpt: "MAth, filter 함수 설명"
+title:  "JS 숫자, 수학 method (Number, Math)"
+excerpt: "Number ,Math method 설명"
+toc : true
+toc_sticky: true
 categories:
   - JS
 tags:
   - JS
-last_modified_at: 2022-08-04
+last_modified_at: 2023-03-05
 ---
-
-## Math
-
+# 10진수 -> 2진수/16진수 toString
+toString() 은 문자열을 반환하는 object의 대표적인 방법입니다 [MDN-toString](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/toString)   
 ```js
-Math.random();
-//0.2141412 (0~1까지 랜덤 숫자 생성)
-//뒤의 소수점들은 float이라고 한다.
+let num = 10;
+num.toString(); // "10";
+num.toString(2); // "1010" 10을 2진수로 나타냄(string); 
 
-// float을 없애는 3가지함수
-Math.round(1.1)
-//1.1~1.4 까지는 1의값을, 1.5부터는 2의값을 돌려준다.[숫자반올림]
-Math.ceil()
-//숫자를 ceil(천장)까지 높여준다. [1.1 = 2] [1.2 = 2]...[1.9 = 2], 1.0 만이 1이 될수있다.
-Math.floor()
-//숫자를 바닥까지 내려준다. [1.9 = 1], [1.8 = 1]... 위와 반대이다.
-Math.floor(Math.random() * 10)
-//0~9 까지의 랜덤 숫자생성
-```
-- [Math 활용](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math)
-
-## js에서 생성해서 html에 추가하기
-
-- 랜덤이미지 html 추가.  
-
-
-```js
-const images = [0.jpeg, 1.jpeg, 2.jpeg];
-const chosenImage = images[Math.floor(Math.random()* 10)];
-const bgImage = document.createElement("img");
-//img 라는 element 생성
-console.log(bgImage);
-//<img> 생성확인 가능 
-bgImage.src = `img/${chosenImage}`;
-//위의 결과를 바탕으로 bgImage에 src사용이 가능하다
-//img폴더에 있는 
-console.log(bgImage); 
-//<img src="img/images"> 생성확인.
-document.body.appendChild(bgImage);
-//appendChild는 body에 html을 추가한다.
-```
-## arrow function
-- 함수를 쓰는방법은 2가지가있다.
-- ex
-
-
-```js
-if (savedToDos !== null){
-  const parsedToDos = JSON.parse(savedToDos);
-  parsedToDos.forEach(sayHello);
-  //forEach : sayHello 라는 함수를 각각 배열값에 실행시켜주는 함수.
-}
-
-(item) => console.log("this is the turn of ", item)
-
-function sayHello(item){
-  console.log("this is the turn of ", item)
-}
-
-//위의 두 함수는 같은것이다.
-
-```
-- 중요한건 JS는 이 function 을 호출하면서 array 에 있는 각각의 item 을 준다.
-- sayHello(a), sayHello(b), sayHello(c) ... 한번에 실행되는게 아니다.
-
-
-## filter
-
-- 만약 array에서 뭔갈 삭제할떄 실제로 array에서 그걸 지우는게아니다.
-- 진짜 일어나는 일은 지우고 싶은 item을 빼고 새 array를 만든다.
-- item을 지우는 게 아니라 item을 제외하는 것이다.
-
-- filter는 array가 있으면 filter 함수가 필요하다고 우리에게 요청한다.
-- filter는 forEach와 비슷하다.
-
-작동방식
-
-```js
-function filterFunction(){
-
-}
-[1, 2, 3, 4].filter(filterFunction)
-
--->filterFunction(1), (2), (3), (4)
-
+let num2 = 255;
+num2.toString(16); // "ff" 255를 16진수로 변환
 ```
 
-- filter함수는 반드시 true를 리턴해야한다. 
-- 만약 새 array에서 이 object를 유지하고 싶으면
-- 만약 false를 리턴하면 그 item은 새 array에 포함되지 않을것이다.
+# Math.PI
+원주율을 구해줍니다
+```js
+Math.PI // 3.141592653589793
+```
+
+# Math.ceil() - 올림
+```js
+let num1 = 5.1;
+let num2 = 5.7;
+
+Math.ceil(num1) // 6
+Math.ceil(num2) // 6
+```
+# Math.floor() - 내림
+```js
+let num1 = 5.1;
+let num2 = 5.7;
+
+Math.floor(num1) // 5
+Math.floor(num2) // 5
+```
+# Math.round() - 반올림
+```js
+let num1 = 5.1;
+let num2 = 5.7;
+
+Math.round(num1) // 5
+Math.round(num2) // 6
+```
+
+# toFixed() - 소수점 자리수
+숫자를 인수로받아 그 숫자만큼 소수점을 표현한다.(**반환값 string**)  
   
-아래 예시 참고
+**toFixed 사용X**  
+예) 소수점 `둘째자리` 까지 표현 (셋쩨 자리에서 반올림)
+```js
+let userRate = 30.1234;
+Math.round(userRate * 100) / 100 // 30.12
+```
+  
+**toFixed 사용O**
+```js
+let userRate = 30.1234;
+userRate.toFixed(2); // "30.12" (string)
+ueerRate.toFixed(0); // "30"
+ueerRate.toFixed(6); // "30.123400"
+```
+
+# IsNaN
+`isNaN()`함수는 어떤 값이 NaN인지 판별합니다.  
+[MDN-IsNaN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/isNaN)  
 
 ```js
-function filterFunction(){
-  return true;
-}
-[1, 2, 3, 4, 5].filter(filterFunction)
-►(5) [1, 2, 3, 4, 5]
-
-
-function filterFunction2(){
-  return false;
-}
-[1, 2, 3, 4, 5].filter(filterFunction2)
-►(0) [ ]
-// array의 item을 유지하고 싶으면 true를 리턴해야 된다.
-
-function filterFunction3(item){
-  return item !== 3;
-  // filterFunction3는 item이 3이 아니면 true를 리턴해야 한다.
-  // filterFunction3는 1,2,3,4,5 각각의 item을 부르게 된다.
-  // 그래서 여기에 item을 저장할 공간을 만들어야 한다.
-}
-[1, 2, 3, 4, 5].filter(filterFunction3)
-►(4) [1, 2, 4, 5]
-// 1 !== 3  true
-// 2 !== 3 true
-// 3 !== 3 false  ...
-
-function filterFunction4(potato){
-  return potato <= 1000;
-}
-[1234, 1000, 123, 456, 545].filter(filterFunction4)
-►(3) [123, 456, 545]
-
-
-
-const todos = [{text:"lalala"}, {text:"lololo"}]
-
-function filterFunction5(todos){
-  return todo.text !== "lalala";
-}
-["lololo"].filter(filterFunction5)
-►(1) ["lololo"]
-
-
-const arr = [1,2,3,4]
-arr.filter(item => item > 2)
-►(2) [3, 4]
-//함수생성 생략
-//arr배열의 argument값이 2보다 큰가?
-const newArr = arr.filter(item => item > 2)
-//arr.filter 의 결과를 받는 newArr 만들기
-//arr 배열 출력시 arr는 newArr를 실행하기 전과 똑같다. [1, 2, 3, 4]
-//newArr : [3, 4]
+let x = Number("x"); // NaN
+x == NaN // false
+x === NaN // false
+NaN == NaN // false
+isNaN(x) // true
+isNaN(3) // false
 ```
-- filter는 원래 array를 변경하지 않는다.
+
+# parseInt
+문자열을 숫자로 바꿔줍니다. Number와 다른점은 문자가 혼용되어있어도 작동을 한다는 점입니다.    
+두번째 인수에 숫자를 전달해서 16진수, 2진수 등으로 바꿀 수 있습니다.  
+
+```js
+let margin = "10px";
+parseInt(margin); // 10
+Number(margin); // NaN
+
+// paseInt는 읽을수있는 부분까지는 읽고 문자를 만나면 숫자를 반환합니다.
+// 아래의 예시는 문자가 먼저있어서 뒤의 숫자를 못읽고 NaN을 반환합니다.
+let redColor = "f3";
+parseInt(redColor); // NaN
+```
+**16진수 변환**  
+```js
+let redColor = "f3";
+parseInt(redColor, 16); // 243
+```
+
+**문자열을 숫자로 변환 후 2진수 변환**
+```js
+parseInt("11",2) // 3
+```
+
+# parseFloat
+parseInt와 동일하게 동작하지만 부동소숫점을 반환합니다.  
+```js
+let padding = "18.5%";
+parseInt(padding); // 18
+parseFloat(padding); // 18.5
+```
+
+# Math.random()
+0 ~ 1 사이 무작위 숫자 생성  
+  
+**1 ~ 100 사이 임의의 숫자를 뽑고 싶다면?**  
+```js
+Math.floor(Math.random() * 100) + 1;
+```
+1. 랜덤숫자 * 뽑고싶은 숫자범위 -> 만약 5까지의 숫자를 뽑고 싶다면 (Math.random() * 5)
+2. floor로 소수점이하 버리기.
+3. 마지막으로 1을 더하는 이유는 랜덤 숫자로 0.0~ 이 나올 수 있어서 floor시 0이 나올 수 도있기 때문에 더해줍니다.
+4. 만약 0에서 100까지 구하고 싶다면 +1을 더해주지 않아도 됩니다.
+
+# Math.max(), Math.min()
+괄호안의 인수들 중 최댓값, 최소값을 구합니다.
+```js
+Math.max(1, 4, -1, 10, 2, 9, 5, 5.54); // 10
+Math.min(1, 4, -1, 10, 2, 9, 5, 5.54); // -1
+```
+
+# Math.abs 
+절대값을 구해줍니다.
+```js
+Math.abs(-1) // 1
+```
+* abs 는 absolute의 약자입니다.
+
+# Math.pow(n,m)
+제곱 값을 구해줍니다. (n의 m승 값)  
+```js
+Math.pow(2,10); // 1024
+```
+* pow 는 power의 약자입니다.
+
+# Math.sqrt()
+제곱근을 구해줍니다.
+```js
+Math.sqrt(16) // 4
+```
+
+* sqrt는 Square Root의 약자입니다.
+
+
+
+
+
+ 
+
+
+
+
+
