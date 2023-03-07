@@ -1,11 +1,13 @@
 ---
 title:  "JS_String method"
 excerpt: "string관련 method 정리"
+toc : true
+toc_sticky: true
 categories:
   - JS
 tags:
   - JS
-last_modified_at: 2023-02-02
+last_modified_at: 2023-03-05
 ---
 
 # includes
