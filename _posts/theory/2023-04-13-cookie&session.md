@@ -1,8 +1,6 @@
 ---
 title:  "cookie, session 설명"
 excerpt: "cookie, session 설명"
-toc : true
-toc_sticky: true
 categories:
   - theory
 tags:
