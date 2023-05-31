@@ -1,5 +1,5 @@
 ---
-title:  "algorithm 기본 문제 풀이"
+title:  "algorithm 기본 문제 풀이 (1)"
 excerpt: "algorithm basic"
 toc: true
 toc_sticky: true
