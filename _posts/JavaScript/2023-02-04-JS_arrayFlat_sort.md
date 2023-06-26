@@ -5,7 +5,7 @@ categories:
   - JS
 tags:
   - JS
-last_modified_at: 2023-02-04
+last_modified_at: 2023-06-26
 ---
 
 # Array flat
@@ -32,7 +32,8 @@ arr4.flat(Infinity);
 ```
 
 # Array sort 
-[MDN-ArraySort](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+[MDN-ArraySort](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)  
+[sort 정리](https://guiyomi.tistory.com/121)
 
 sort() 메서드는 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.  
 참고로 **sort 는 배열에 변화를 준다.**  
