@@ -210,21 +210,27 @@ ESLint는 기본적으로 미리 선언하지 않고 접근하는 변수에 대�
   "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended", "plugin:jsx-a11y/recommended", "prettier/prettier", "plugin:import/recommended"],
 
   "rules": {
+    // React JSX 코드에서 React를 import하지 않아도 되도록 합니다.
     "react/react-in-jsx-scope": "off",
 
+    // 이 규칙은 익명으로 내보내는(export default) 모듈을 허용합니다.
     "import/no-anonymous-default-export": "off",
+    // 이 규칙은 import 문 이후에 개행을 요구합니다.
     "import/newline-after-import": "error",
+    // 이 규칙은 모든 import 문이 다른 문들보다 먼저 위치해야 함을 요구합니다.
     "import/first": "error",
+    // 이 규칙은 임포트하는 모듈의 경로가 해결되지 않아도 허용합니다.
     "import/no-unresolved": "off",
-
+    // 이 규칙은 import 문을 정렬하는 것을 요구합니다.
     "simple-import-sort/imports": "error",
-
+    // 이 규칙은 React의 훅(Hook)을 사용하는 규칙을 적용합니다.
     "react-hooks/rules-of-hooks": "error",
+    // 이 규칙은 useEffect 및 useCallback 등의 훅(Hook)에서 의존성 배열(Dependency Array)을 명시해야 함을 요구합니다.
     "react-hooks/exhaustive-deps": "warn",
-
+    // 이 규칙은 Prettier 코드 포매터의 규칙을 적용합니다.
     "prettier/prettier": "error",
 
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-multiple-empty-lines": ["error", { "max": 1 }], // 이 규칙은 연속된 빈 줄의 최대 개수를 제한합니다.
     "eol-last": ["error", "always"], // 파일의 마지막에 줄바꿈을 넣을 것인가?
     "comma-dangle": ["error", "always-multiline"], // 후행쉼표
     "object-curly-spacing": ["error", "always"], // 중괄호 앞뒤의 공백 여부
@@ -250,12 +256,67 @@ ESLint는 기본적으로 미리 선언하지 않고 접근하는 변수에 대�
   },
 
   "settings": {
+    // 이 설정은 모듈 경로를 해석하는 방법을 지정합니다.
     "import/resolver": {
-      "typescript": {}
+      // TypeScript 모듈 해석을 사용하면 TypeScript 확장자인 .ts 및 .tsx 파일과 관련된 모듈 경로를 해석할 수 있습니다.
+      "typescript": {} // TypeScript 모듈 해석을 사용하겠다는 의미
     },
+    // 이 설정은 import 문을 구문 분석하는 데 사용되는 파서를 지정합니다.
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
     }
   }
 }
 ```
+
+### plugins
+
+- `react` : 이 플러그인은 React와 관련된 ESLint 규칙을 제공합니다. 예를 들어, JSX 문법에 대한 규칙, React 컴포넌트 사용에 관련된 규칙 등이 포함됩니다.
+
+- `@typescript-eslint`: 이 플러그인은 TypeScript와 관련된 ESLint 규칙을 제공합니다.
+
+  - TypeScript에서 특정한 규칙을 적용하고자 할 때 사용됩니다. 예를 들어, 타입 체크, 타입 주석, 타입 추론 등에 관련된 규칙을 설정할 수 있습니다.
+
+- `react-hooks` : 이 플러그인은 React Hooks에 대한 규칙을 제공합니다.
+
+  - React Hooks는 함수형 컴포넌트에서 상태 관리와 생명주기를 다루는 데 사용되는 기능인데, 이 플러그인을 사용하여 Hooks 사용에 관련된 규칙을 설정하고 따르도록 유도할 수 있습니다.
+  - 예를 들어, Hooks 사용 시 규칙을 지키지 않으면 경고 또는 오류를 발생시킬 수 있습니다.
+
+- `import`: 이 플러그인은 JavaScript 또는 TypeScript 모듈의 import 문에 관련된 규칙을 제공합니다.
+
+  - 예를 들어, 올바른 모듈 경로, 중복된 import 문, 정렬된 import 등에 관련된 규칙을 설정할 수 있습니다.
+
+- `simple-import-sort`: 이 플러그인은 import 문을 간단하게 정렬하기 위한 규칙을 제공합니다.
+
+  - import 문을 정렬하면 코드의 일관성과 가독성을 향상시킬 수 있습니다.
+
+- `prettier`: 이 플러그인은 Prettier 코드 포매터와 통합하기 위한 규칙을 제공합니다.
+
+- `jsx-a11y`: 이 플러그인은 웹 애플리케이션의 접근성을 향상시키기 위한 규칙을 제공합니다.
+  - 예를 들어, 화면 낭독기를 위한 접근성 요소, 마우스 이벤트 핸들링, 이미지 alt 텍스트 등에 관련된 규칙을 설정할 수 있습니다.
+  - 이를 통해 웹 애플리케이션이 보다 더 포괄적이고 접근성이 높은 경험을 제공할 수 있습니다.
+
+### extends
+
+`recommended` 는 eslint에서 기본적으로 제공되는 권장 규칙 세트를 의미합니다.
+
+- `eslint:recommended` : 이 설정은 ESLint에서 권장하는 일반적인 규칙들을 포함합니다.
+
+  - 일반적인 JavaScript 코드 스타일 및 오류 감지에 대한 규칙이 포함되어 있습니다.
+
+- `plugin:react/recommended` : 이 설정은 React에 관련된 ESLint 규칙을 확장합니다.
+
+  - React 컴포넌트 사용에 대한 규칙을 포함하고 있으며, JSX 문법 검사, 컴포넌트 사용 규칙 등을 설정할 수 있습니다.
+
+- `plugin:@typescript-eslint/recommended` : 이 설정은 TypeScript와 관련된 ESLint 규칙을 확장합니다.
+
+  - TypeScript에 특화된 규칙을 적용하고자 할 때 사용됩니다.
+  - 예를 들어, 타입 체크, 타입 주석, 타입 추론 등에 관련된 규칙이 설정됩니다.
+
+- `plugin:jsx-a11y/recommended` : 이 설정은 웹 애플리케이션의 접근성을 향상시키기 위한 ESLint 규칙을 포함합니다.
+
+  - 접근성 요소, 마우스 이벤트 핸들링, 이미지 alt 텍스트 등에 관련된 규칙을 설정할 수 있습니다.
+
+- `prettier/prettier` : 이 설정은 Prettier 코드 포매터와 ESLint를 통합하기 위한 규칙을 제공합니다. Prettier를 사용하여 코드 스타일을 자동으로 정리하면서, ESLint의 규칙과 충돌하는 부분을 해결하기 위해 이 설정을 사용합니다.
+
+- `plugin:import/recommended` : 이 설정은 모듈 임포트와 관련된 ESLint 규칙을 포함합니다. 올바른 모듈 경로, 중복된 import 문, 정렬된 import 등에 관련된 규칙을 설정할 수 있습니다.
