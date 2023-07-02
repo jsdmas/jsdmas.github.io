@@ -320,3 +320,40 @@ ESLint는 기본적으로 미리 선언하지 않고 접근하는 변수에 대�
 - `prettier/prettier` : 이 설정은 Prettier 코드 포매터와 ESLint를 통합하기 위한 규칙을 제공합니다. Prettier를 사용하여 코드 스타일을 자동으로 정리하면서, ESLint의 규칙과 충돌하는 부분을 해결하기 위해 이 설정을 사용합니다.
 
 - `plugin:import/recommended` : 이 설정은 모듈 임포트와 관련된 ESLint 규칙을 포함합니다. 올바른 모듈 경로, 중복된 import 문, 정렬된 import 등에 관련된 규칙을 설정할 수 있습니다.
+
+#### 초기 세팅 라이브러리
+
+- @typescript-eslint/eslint-plugin 및 @typescript-eslint/parser
+
+  - TypeScript를 사용하는 프로젝트에서 ESLint를 통해 TypeScript의 정적 타입 체크를 수행할 수 있도록 도와주는 플러그인 및 구문 분석기입니다.
+
+- eslint-config-prettier
+
+  - Prettier와 ESLint를 함께 사용할 때 발생하는 충돌을 해결하기 위한 설정입니다.
+
+- eslint-import-resolver-typescript
+
+  - TypeScript 프로젝트에서 모듈을 가져오는(import) 과정을 지원하기 위한 도구입니다.
+  - TypeScript의 모듈 경로를 해석하여 정확한 위치에서 모듈을 가져올 수 있도록 도와줍니다.
+
+- eslint-plugin-import
+
+  - 자바스크립트 및 TypeScript 프로젝트에서 import 문과 모듈 경로를 관리하고 해석하는 데 도움을 주는 플러그인입니다.
+
+- eslint-plugin-jsx-a11y
+- JSX를 사용하는 React 애플리케이션에서 웹 접근성을 개선하기 위해 JSX 요소에 대한 정적 분석을 수행합니다.
+
+- eslint-plugin-prettier
+
+  - Prettier와 ESLint를 통합하여 코드 포맷팅과 관련된 규칙을 자동으로 적용할 수 있도록 도와줍니다.
+
+- eslint-plugin-react
+
+  - React 프로젝트에서 React 관련 규칙을 지정하고 정적 분석을 수행하는 플러그인입니다.
+
+- eslint-plugin-react-hooks
+
+  - React Hooks를 사용할 때 권장되는 규칙을 지정하고 정적 분석을 수행하는 플러그인입니다.
+
+- eslint-plugin-simple-import-sort
+  - import 문을 정렬하여 가독성을 향상시키는 도구입니다. 특히 모듈의 상대적인 경로나 패키지를 구분하여 정렬하는 기능을 제공합니다.
