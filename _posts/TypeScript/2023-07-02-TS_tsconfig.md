@@ -380,6 +380,8 @@ yarn add @craco/craco
 }
 ```
 
+절대경로 설정
+
 **craco.config.js**
 
 ```js
@@ -394,8 +396,6 @@ module.exports = {
   },
 };
 ```
-
-위와같이 설정하면 따로 ts에서 tsconfig-paths같은 라이브러리를 세팅해주지 않아도 절대경로 설정이 가능합니다.
 
 **tsconfig.json**
 
