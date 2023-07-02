@@ -92,7 +92,7 @@ function foo() {
   return (
     <MarketContext.Provider
       value={{
-        items: initialState.items,
+        items: items,
         cart: { cartState, cartDispatch },
         check: { checkState, checkDispatch },
       }}
