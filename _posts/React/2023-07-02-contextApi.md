@@ -79,7 +79,7 @@ Provider를 redux처럼 자식 컴포넌트들을 wrapping 합니다.
 
 여기서 약간의 차이점이라면 redux는 하나의 store를 사용하는 것이 기본적인 룰인데 반해, Context API는 다수의 Context를 만들 수 있습니다.
 
-```jsx
+```tsx
 const MarketContext = createContext();
 function foo() {
   const [cartState, cartDispatch] = useReducer(cartReducer, initialState.cartItems);
@@ -107,7 +107,7 @@ function foo() {
 
 리액트의 빌트인 훅인 useContext를 통해 컴포넌트는 간단하게 자신을 wrapping 하고 있는 Provider의 value에 접근 가능합니다.
 
-```jsx
+```tsx
 function ItemList() {
   const { items, cart, check } = useContext(MarketContext);
   const { cartDispatch, cartState } = cart;
