@@ -174,6 +174,8 @@ exclude 속성은 프로젝트에서 컴파일 대상에서 제외할 파일들�
 
 <details>
 <summary> json 펼치기</summary>
+  
+<div>
 
 ```json
 {
@@ -253,6 +255,8 @@ exclude 속성은 프로젝트에서 컴파일 대상에서 제외할 파일들�
 }
 ```
 
+</div>
+  
 </details>
 
 ## Language and Environment 옵션
