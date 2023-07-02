@@ -189,11 +189,7 @@ ESLint는 기본적으로 미리 선언하지 않고 접근하는 변수에 대�
 
 일부 ESLint 플러그인은 추가적인 설정이 가능하다. 이런 경우에는 설정 파일의 `settings`옵션을 사용합니다.
 
-# ref
-
-[참고한 글](https://velog.io/@2wndrhs/%EC%95%8C%EC%95%84%EB%91%90%EB%A9%B4-%EC%93%B8%EB%8D%B0%EC%9E%88%EB%8A%94-ESLint-Prettier-%EC%84%A4%EC%A0%95-%EB%B0%A9%EB%B2%95)  
-[https://poiemaweb.com/eslint](https://poiemaweb.com/eslint)  
-[https://www.daleseo.com/eslint-config/](https://www.daleseo.com/eslint-config/)
+# more info
 
 ```json
 {
@@ -269,7 +265,7 @@ ESLint는 기본적으로 미리 선언하지 않고 접근하는 변수에 대�
 }
 ```
 
-### plugins
+## plugins
 
 - `react` : 이 플러그인은 React와 관련된 ESLint 규칙을 제공합니다. 예를 들어, JSX 문법에 대한 규칙, React 컴포넌트 사용에 관련된 규칙 등이 포함됩니다.
 
@@ -296,7 +292,7 @@ ESLint는 기본적으로 미리 선언하지 않고 접근하는 변수에 대�
   - 예를 들어, 화면 낭독기를 위한 접근성 요소, 마우스 이벤트 핸들링, 이미지 alt 텍스트 등에 관련된 규칙을 설정할 수 있습니다.
   - 이를 통해 웹 애플리케이션이 보다 더 포괄적이고 접근성이 높은 경험을 제공할 수 있습니다.
 
-### extends
+## extends
 
 `recommended` 는 eslint에서 기본적으로 제공되는 권장 규칙 세트를 의미합니다.
 
@@ -321,7 +317,7 @@ ESLint는 기본적으로 미리 선언하지 않고 접근하는 변수에 대�
 
 - `plugin:import/recommended` : 이 설정은 모듈 임포트와 관련된 ESLint 규칙을 포함합니다. 올바른 모듈 경로, 중복된 import 문, 정렬된 import 등에 관련된 규칙을 설정할 수 있습니다.
 
-#### 초기 세팅 라이브러리
+## 초기 세팅 라이브러리
 
 - @typescript-eslint/eslint-plugin 및 @typescript-eslint/parser
 
@@ -357,3 +353,9 @@ ESLint는 기본적으로 미리 선언하지 않고 접근하는 변수에 대�
 
 - eslint-plugin-simple-import-sort
   - import 문을 정렬하여 가독성을 향상시키는 도구입니다. 특히 모듈의 상대적인 경로나 패키지를 구분하여 정렬하는 기능을 제공합니다.
+
+# ref
+
+[참고한 글](https://velog.io/@2wndrhs/%EC%95%8C%EC%95%84%EB%91%90%EB%A9%B4-%EC%93%B8%EB%8D%B0%EC%9E%88%EB%8A%94-ESLint-Prettier-%EC%84%A4%EC%A0%95-%EB%B0%A9%EB%B2%95)  
+[https://poiemaweb.com/eslint](https://poiemaweb.com/eslint)  
+[https://www.daleseo.com/eslint-config/](https://www.daleseo.com/eslint-config/)
