@@ -91,11 +91,7 @@ function foo() {
 
   return (
     <MarketContext.Provider
-    // value={{
-    //   items: items,
-    //   cart: { cartState, cartDispatch },
-    //   check: { checkState, checkDispatch },
-    // }}
+    // value=
     >
       {children}
     </MarketContext.Provider>
