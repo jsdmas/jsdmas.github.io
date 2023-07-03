@@ -91,7 +91,11 @@ function foo() {
 
   return (
     <MarketContext.Provider
-    // value={{아이템들}}
+    // value={{
+    //   items: items,
+    //   cart: { cartState, cartDispatch },
+    //   check: { checkState, checkDispatch },
+    // }}
     >
       {children}
     </MarketContext.Provider>
