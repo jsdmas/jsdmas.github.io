@@ -6,24 +6,20 @@ categories:
   - React
 tags:
   - React
-last_modified_at: 2023-07-02
+last_modified_at: 2023-07-05
 ---
-
-참고  
-[https://velog.io/@benis/Context-API](https://velog.io/@benis/Context-API)
 
 # Context API
 
-> context를 이용하면 단계마다 일일이 props를 넘겨주지 않고도 컴포넌트 트리 전체에 데이터를 제공할 수 있습니다.
+> Context API란 React에서 제공하는 내장 API로서 컴포넌트들에게 동일한 Context(맥락)을 전달하는데 사용할 수 있습니다.
 
-리액트에서 제공하는 built-in API로 State 관리를 외부 라이브러리 없이 할 수 있다.  
-또한 리액트에서 Context API를 위해 훅스도 제공한다.
+일반적으로 리액트에서 데이터를 전달하는 기본 원칙은 `단방향성`입니다. 그 말은 부모 컴포넌트에서 자식 컴포넌트 방향으로만 데이터를 전달할 수 있다는 의미입니다.
 
-State Management 라이브러리로는 redux, Mobx, Recoil.js 등이 있다.
+단방향성은 애플리케이션의 안정성을 높이고 흐름을 단순화하는데 유용하지만 때떄로 너무 많은 단계를 거쳐서 자식 컴포넌트에 데이터를 전달해야 한다는 문제점을 야기하기도 합니다.(props drilling)
 
-# context가 해결해주는 문제
+예를들어 5단계 아래에 위치한 자식 컴포넌트에게 데이터를 넘겨야 한다면, 중간에 4개의 컴포넌트는 해당 데이터를 사용하지 않을지라도 props를 계속해서 넘겨줘야하는 문제가 발생하는 것입니다. 또한, 형제 관계나 특정 범위 안에 있는 컴포넌트들에게 데이터를 넘기기 위해서는 더 복잡한 상황이 발생하기도 합니다.
 
-> props drilling을 막는 데 도움을 줍니다.
+컴포넌트의 구조를 잘 설계하고 합성을 적극적으로 활용해 데이터를 계속해서 넘겨줘야 하는 상황을 안만드는 것이 1옵션이지만, 해당 방법으로 해결이 안될 때는 Context API를 사용할 수 있습니다.
 
 ## props drilling
 
@@ -55,114 +51,59 @@ function Header({ theme }) {
 
 ## 1. createContext
 
-redux에서의 store와 같은 하나의 Context 객체가 필요합니다.
+Context API를 사용하기 위해서는 먼저 공유할 Context를 만들어줘야 합니다.  
+Context는 `createContext`라는 함수를 통해서 사용할 수 있습니다.
 
 ```jsx
 import { createContext } from 'react';
 
-export const MyContext = createContext(1);
+const MyContext = createContext(1);
 ```
 
-createContext를 실행하면 Provider와 Consumer을 담고 있는 컨텍스트 객체가 생성됩니다.
+- createContext 함수를 호출하면 Context 객체가 리턴됩니다.
+- 함수를 호출할 때는 defaultValue를 인자로 전달할 수 있습니다.
 
-Provider는 state나 action.type에 따른 dispatch 함수들을 value prop에 넣어서 제공하는 역할입니다.
-
-Consumer는 Provider에 담긴 state와 dispatch 함수들을 필요한 컴포넌트에서 접근할 수 있게 만드는 역할입니다.
+**이떄 defaultValue는 Context Value의 초기값이 아닌, 다른 컴포넌트에서 Context에 접근하려고 하지만 Provider로 감싸져 있지 않은 상황에서 사용될 값을 의미합니다.**
 
 ## 2. Provider 생성
 
-위 처럼 context 객체를 생성하고 export 하였다면 Provider를 생성할 수 있습니다.
+만들어진 Context를 통해서 특정한 값을 전달하기 위해서는 Provider 컴포넌트를 이용해야 합니다.
 
-Provider는 context의 뿌리라고 할 수 있습니다. 필요한 모든 것을 담고 있고, Consumer로 wrapping된 컴포넌트는 Provider에 접근할 수 있습니다.
+Context 객체에는 Provider라는 프로퍼티가 있으며 이는 리액트 컴포넌트입니다.
 
-Provider를 redux처럼 자식 컴포넌트들을 wrapping 합니다.
+Provider 컴포넌트는 value라는 props을 가지고 있으며, value에 할당된 값을 Provider 컴포넌트 하위에 있는 어떤 컴포넌트든 접근할 수 있게 해주는 기능을 가지고 있습니다.
 
-여기서 약간의 차이점이라면 redux는 하나의 store를 사용하는 것이 기본적인 룰인데 반해, Context API는 다수의 Context를 만들 수 있습니다.
+```jsx
+const UserContext = createContext(null);
 
-```tsx
-const MarketContext = createContext();
-function foo() {
-  const [cartState, cartDispatch] = useReducer(cartReducer, initialState.cartItems);
+const user = { name: 'yeonuk' };
 
-  const [checkState, checkDispatch] = useReducer(
-    checkReducer,
-    cartState.map((el) => el.itemId)
-  );
-
-  return (
-    <MarketContext.Provider
-    // value=
-    >
-      {children}
-    </MarketContext.Provider>
-  );
-}
+<UserContext.Provider value={user}>
+  <Child />
+</UserContext.Provider>;
 ```
 
-## 3. Context에 접근 with Hooks
+## 3. useContext
 
-리액트의 빌트인 훅인 useContext를 통해 컴포넌트는 간단하게 자신을 wrapping 하고 있는 Provider의 value에 접근 가능합니다.
+Class 컴포넌트에서 Context를 통해 공유된 값에 접근하려면, Consumer라는 다소 복잡한 방식을 통해서 접근해야 합니다. 하지만 함수 컴포넌트에서는 useContext라는 내장 Hook을 이용해 Context Value에 접근할 수 있습니다.
 
 ```tsx
-function ItemList() {
-  const { items, cart, check } = useContext(MarketContext);
-  const { cartDispatch, cartState } = cart;
-  const { checkDispatch } = check;
-  return (
-    <div id='item-list-container'>
-      <div id='item-list-body'>
-        <div id='item-list-title'>선물 모음</div>
-        {items.map((item, idx) => (
-          <Item item={item} key={idx} handleClick={() => handleClick(item.id)} />
-        ))}
-      </div>
-    </div>
-  );
+const UserContext = createContext(null);
+
+const user = { name: 'yeonuk' };
+
+<UserContext.Provider value={user}>
+  <Child />
+</UserContext.Provider>;
+
+function Child() {
+  const user = useContext(UserContext);
+
+  return <h1>{user.name}</h1>;
 }
 ```
-
-useContext훅은 createContext를 사용하고 리턴받은 객체를 인자로 받습니다.  
-이렇게 해서 ItemList는 state, dispatch 함수에 직접 접근을 할 수 있습니다.
 
 # Context API 단점
 
 Provider의 value prop에 있는 state와 dispatch가 변할 떄 마다, Provider를 구독하고 있는 모든 컴포넌트들이 리렌더링 됩니다.  
 useMemo를 통해 Provider의 value props를 메모이제이션 하거나, 독립적인 context를 만들어주는 방법이 있습니다.
-
-# Context + useReducer
-
-둘을 함꼐 사용하면 더 직관적이고 코드 양도 눈에 띄게 줄어듭니다.
-
-```jsx
-const cartReducer = (state, { type, id, quantity }) => {
-  switch (type) {
-    case ADD_ITEM:
-      return [...state, { itemId: id, quantity: 1 }];
-    case INCRE_QUANTITY:
-      return state.map((item) =>
-        item.itemId === id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-    case DELETE_ITEM:
-      return state.filter((item) => item.itemId !== id);
-
-    case CHANGE_QUANTITY:
-      return state.map((item) =>
-        item.itemId === id ? { ...item, quantity } : item
-      );
-    default:
-      return state;
-  }
-};
-
-
-export const MarketContextProvider = ({ children }) => {
-  const [cartState, cartDispatch] = useReducer(
-    cartReducer,
-    initialState.cartItems
-  );
-
-  const [checkState, checkDispatch] = useReducer(
-    checkReducer,
-    cartState.map((el) => el.itemId)
-  );
-```
